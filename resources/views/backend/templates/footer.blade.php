@@ -1,40 +1,3 @@
-         @if(Illuminate\Support\Facades\Auth::check())
-         <div class="card-block">
-                     <h6 class="sub-title p-20"></h6>
-
-
-          <div class="text-center text-underline">
-
-
-    <a href="{{ route('logout') }}"
-                                            onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                          <h5> LOGOUT  <i class="ti-layout-sidebar-left"></i> </h5>
-                                        </a>
-                                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                            {{ csrf_field() }}
-                                        </form>
-
-          </div>
-         </div>
-         @endif
-  
-
-
-        </div>
-
-      </div>
-
-  </div>
-
-
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
 <!-- Warning Section Starts -->
 <!-- Older IE warning message -->
     <!--[if lt IE 10]>
@@ -45,31 +8,31 @@
         <ul class="iew-download">
             <li>
                 <a href="http://www.google.com/chrome/">
-                    <img src="assets/images/browser/chrome.png" alt="Chrome">
+                    <img src="backend/assets/images/browser/chrome.png" alt="Chrome">
                     <div>Chrome</div>
                 </a>
             </li>
             <li>
                 <a href="https://www.mozilla.org/en-US/firefox/new/">
-                    <img src="assets/images/browser/firefox.png" alt="Firefox">
+                    <img src="backend/assets/images/browser/firefox.png" alt="Firefox">
                     <div>Firefox</div>
                 </a>
             </li>
             <li>
                 <a href="http://www.opera.com">
-                    <img src="assets/images/browser/opera.png" alt="Opera">
+                    <img src="backend/assets/images/browser/opera.png" alt="Opera">
                     <div>Opera</div>
                 </a>
             </li>
             <li>
                 <a href="https://www.apple.com/safari/">
-                    <img src="assets/images/browser/safari.png" alt="Safari">
+                    <img src="backend/assets/images/browser/safari.png" alt="Safari">
                     <div>Safari</div>
                 </a>
             </li>
             <li>
                 <a href="http://windows.microsoft.com/en-us/internet-explorer/download-ie">
-                    <img src="assets/images/browser/ie.png" alt="">
+                    <img src="backend/assets/images/browser/ie.png" alt="">
                     <div>IE (9 & above)</div>
                 </a>
             </li>
@@ -83,38 +46,45 @@
 {{-- bower_components --}}
 
 
-<!-- jquery slimscroll js -->
+
+{{HTML::script('backend/bower_components/jquery/js/jquery.min.js')}}
+{{HTML::script('backend/bower_components/jquery-ui/js/jquery-ui.min.js')}}
+{{HTML::script('backend/bower_components/popper.js/js/popper.min.js')}}
+{{HTML::script('backend/bower_components/bootstrap/js/bootstrap.min.js')}}
 {{HTML::script('backend/bower_components/jquery-slimscroll/js/jquery.slimscroll.js')}}
-<!-- modernizr js -->
 {{HTML::script('backend/bower_components/modernizr/js/modernizr.js')}}
 {{HTML::script('backend/bower_components/modernizr/js/css-scrollbars.js')}}
 
-<!-- Datatables js -->
-{{HTML::script('backend/bower_components/datatables.net-responsive/js/dataTables.responsive.min.js')}}
-{{HTML::script('backend/bower_components/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js')}}
+{{HTML::script('backend/bower_components/peity/js/jquery.peity.js')}}
 
-{{HTML::script('backend/bower_components/datatables.net/js/jquery.dataTables.min.js')}}
-{{HTML::script('backend/bower_components/datatables.net-buttons/js/dataTables.buttons.min.js')}}
-{{HTML::script('backend/bower_components/datatables.net-bs4/js/dataTables.bootstrap4.min.js')}}
+{{HTML::script('backend/bower_components/chart.js/js/Chart.js')}}
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
-{{-- Datepicker --}}
-{{HTML::script('backend/bower_components/bootstrap-datepicker/js/bootstrap-datepicker.min.js')}}
-{{HTML::script('backend/assets/pages/advance-elements/bootstrap-datetimepicker.min.js')}}
+{{HTML::script('backend/bower_components/d3/js/d3.js')}}
+{{HTML::script('backend/bower_components/nvd3/js/nv.d3.js')}}
+{{HTML::script('backend/assets/pages/chart/nv-chart/js/stream_layers.js')}}
+{{HTML::script('backend/assets/pages/widget/amchart/amcharts.js')}}
+{{HTML::script('backend/assets/pages/widget/amchart/pie.js')}}
+{{HTML::script('backend/assets/pages/widget/amchart/ammap.js')}}
+{{HTML::script('backend/assets/pages/widget/amchart/light.js')}}
+{{HTML::script('backend/assets/pages/widget/amchart/worldLow.js')}}
+{{HTML::script('backend/assets/pages/widget/amchart/continentsLow.js')}}
+{{HTML::script('backend/assets/pages/widget/amchart/light.js')}}
 
+{{HTML::script('backend/bower_components/raphael/js/raphael.min.js')}}
+{{HTML::script('backend/bower_components/morris.js/js/morris.js')}}
+{{HTML::script('backend/assets/pages/chart/knob/jquery.knob.js')}}
+{{HTML::script('backend/bower_components/i18next/js/i18next.min.js')}}
 
-<!-- Custom js -->
-{{HTML::script('backend/assets/pages/dashboard/custom-dashboard.min.js')}}
+{{HTML::script('backend/bower_components/i18next-xhr-backend/js/i18nextXHRBackend.min.js')}}
+{{HTML::script('backend/bower_components/i18next-browser-languagedetector/js/i18nextBrowserLanguageDetector.min.js')}}
+{{HTML::script('backend/bower_components/jquery-i18next/js/jquery-i18next.min.js')}}
+{{HTML::script('backend/assets/pages/dashboard/analytic-dashboard.js')}}
 {{HTML::script('backend/assets/js/SmoothScroll.js')}}
-{{HTML::script('backend/assets/js/pcoded.min.js')}}
-{{HTML::script('backend/assets/js/menu/menu-sidebar-static.js')}}
-{{HTML::script('backend/assets/js/jquery.mCustomScrollbar.concat.min.js')}}
-{{HTML::script('backend/assets/js/script.min.js')}}
- {{HTML::script('backend/js/custom.js')}}
- @if (Request::is('login') || Request::is('password/reset/*') || Request::is('password/reset')) 
-  <script src="{{ asset('js/app.js') }}"></script>
 
-  @endif
+{{HTML::script('backend/assets/js/pcoded.min.js')}}
+{{HTML::script('backend/assets/js/demo-12.js')}}
+{{HTML::script('backend/assets/js/jquery.mCustomScrollbar.concat.min.js')}}
+{{HTML::script('backend/assets/js/script.js')}}
 </body>
 </body>
 
