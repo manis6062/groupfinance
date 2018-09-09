@@ -1,32 +1,5 @@
 @extends('backend.templates.app')
-@if (Auth::user()->isAdministrator())
-@section('title' , 'Elomark : Administrator')
-@elseif (Auth::user()->isSalesDeveloper())
-@section('title' , 'Elomark : Sales Developer')
-@elseif (Auth::user()->isCampaignManager())
-@section('title' , 'Elomark : Campaign Manager')
-@elseif (Auth::user()->isClientAdministrator())
-@section('title' , 'Elomark : Client Administrator')
-@elseif (Auth::user()->isClient())
-@section('title' , 'Elomark : Client')
-@endif
-@if($is_client && $is_client == 'y')
-@section('sub_title' , 'Create Client User')
-@else
-@section('sub_title' , 'Create Elomark User')
-@endif
 @section('content')
-
-<style type="text/css">
-  .input-group-addon{
-    background: none !important;
-    width: 150px;
-}
-</style>
-
-
-
-
 
 <div class="row">
     <div class="col-xl-12">

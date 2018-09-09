@@ -7979,7 +7979,7 @@ table tbody .border-bottom-info td {
 }
 .pcoded[theme-layout="vertical"][pcoded-device-type="desktop"] .pcoded-header .pcoded-left-header .pcoded-logo .logo-text, .pcoded[theme-layout="vertical"][pcoded-device-type="phone"] .pcoded-header.iscollapsed .pcoded-left-header .pcoded-logo .logo-text, .pcoded[theme-layout="vertical"][pcoded-device-type="tablet"] .pcoded-header .pcoded-left-header .pcoded-logo .logo-text {
   font-family: open sans;
-  font-size: 16px;
+  font-size: 6px;
   font-weight: 600;
   left: 80px;
   margin: 0 auto !important;
