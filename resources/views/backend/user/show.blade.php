@@ -31,6 +31,8 @@
   </div>
 </div>
     <!-- Marketing Start -->
+    <div class="row">
+
     <div class="col-md-12">
       <div class="card">
           <div class="card-header">
@@ -94,11 +96,222 @@
                                   </div>
                               </td>
                           </tr>
+                          <tr>
+                            <td><a href="#!"><i class="icofont icofont-social-facebook bg-facebook social-icon"></i></a>
+                                <div class="table-contain">
+                                    <h6>FaceBook ads</h6>
+                                    <p class="text-muted">6:00am- 8:00am</p>
+                                </div>
+                            </td>
+                            <td>
+                                <p class="text-muted">Softtech</p>
+                            </td>
+                            <td>
+                                <p class="text-muted">Softtech</p>
+                            </td>
+                            <td>
+                                <i class="icofont icofont-bird text-c-green"></i>
+                                <p class="m-l-10 text-c-green">6.45%</p>
+                            </td>
+                            <td><span>$5132</span></td>
+                            <td>
+                                <button class="btn btn-default btn-bg-c-blue btn-outline-default btn-round btn-action">Activate</button>
+                            </td>
+                            <td>
+                                <div class="dropdown-primary dropdown open">
+                                    <button class="btn btn-light dropdown-toggle" type="button" data-toggle="dropdown"><i class="icofont icofont-brand-flikr text-muted"></i>
+                                    </button>
+                                    <div class="dropdown-menu" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut">
+                                        <a class="dropdown-item waves-light waves-effect" href="#">Insert</a>
+                                        <a class="dropdown-item waves-light waves-effect" href="#">Update</a>
+                                        <a class="dropdown-item waves-light waves-effect" href="#">Delete</a>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item waves-light waves-effect" href="#">disable</a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><a href="#!"><i class="icofont icofont-social-facebook bg-facebook social-icon"></i></a>
+                                <div class="table-contain">
+                                    <h6>FaceBook ads</h6>
+                                    <p class="text-muted">6:00am- 8:00am</p>
+                                </div>
+                            </td>
+                            <td>
+                                <p class="text-muted">Softtech</p>
+                            </td>
+                            <td>
+                                <p class="text-muted">Softtech</p>
+                            </td>
+                            <td>
+                                <i class="icofont icofont-bird text-c-green"></i>
+                                <p class="m-l-10 text-c-green">6.45%</p>
+                            </td>
+                            <td><span>$5132</span></td>
+                            <td>
+                                <button class="btn btn-default btn-bg-c-blue btn-outline-default btn-round btn-action">Activate</button>
+                            </td>
+                            <td>
+                                <div class="dropdown-primary dropdown open">
+                                    <button class="btn btn-light dropdown-toggle" type="button" data-toggle="dropdown"><i class="icofont icofont-brand-flikr text-muted"></i>
+                                    </button>
+                                    <div class="dropdown-menu" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut">
+                                        <a class="dropdown-item waves-light waves-effect" href="#">Insert</a>
+                                        <a class="dropdown-item waves-light waves-effect" href="#">Update</a>
+                                        <a class="dropdown-item waves-light waves-effect" href="#">Delete</a>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item waves-light waves-effect" href="#">disable</a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><a href="#!"><i class="icofont icofont-social-facebook bg-facebook social-icon"></i></a>
+                                <div class="table-contain">
+                                    <h6>FaceBook ads</h6>
+                                    <p class="text-muted">6:00am- 8:00am</p>
+                                </div>
+                            </td>
+                            <td>
+                                <p class="text-muted">Softtech</p>
+                            </td>
+                            <td>
+                                <p class="text-muted">Softtech</p>
+                            </td>
+                            <td>
+                                <i class="icofont icofont-bird text-c-green"></i>
+                                <p class="m-l-10 text-c-green">6.45%</p>
+                            </td>
+                            <td><span>$5132</span></td>
+                            <td>
+                                <button class="btn btn-default btn-bg-c-blue btn-outline-default btn-round btn-action">Activate</button>
+                            </td>
+                            <td>
+                                <div class="dropdown-primary dropdown open">
+                                    <button class="btn btn-light dropdown-toggle" type="button" data-toggle="dropdown"><i class="icofont icofont-brand-flikr text-muted"></i>
+                                    </button>
+                                    <div class="dropdown-menu" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut">
+                                        <a class="dropdown-item waves-light waves-effect" href="#">Insert</a>
+                                        <a class="dropdown-item waves-light waves-effect" href="#">Update</a>
+                                        <a class="dropdown-item waves-light waves-effect" href="#">Delete</a>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item waves-light waves-effect" href="#">disable</a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><a href="#!"><i class="icofont icofont-social-facebook bg-facebook social-icon"></i></a>
+                                <div class="table-contain">
+                                    <h6>FaceBook ads</h6>
+                                    <p class="text-muted">6:00am- 8:00am</p>
+                                </div>
+                            </td>
+                            <td>
+                                <p class="text-muted">Softtech</p>
+                            </td>
+                            <td>
+                                <p class="text-muted">Softtech</p>
+                            </td>
+                            <td>
+                                <i class="icofont icofont-bird text-c-green"></i>
+                                <p class="m-l-10 text-c-green">6.45%</p>
+                            </td>
+                            <td><span>$5132</span></td>
+                            <td>
+                                <button class="btn btn-default btn-bg-c-blue btn-outline-default btn-round btn-action">Activate</button>
+                            </td>
+                            <td>
+                                <div class="dropdown-primary dropdown open">
+                                    <button class="btn btn-light dropdown-toggle" type="button" data-toggle="dropdown"><i class="icofont icofont-brand-flikr text-muted"></i>
+                                    </button>
+                                    <div class="dropdown-menu" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut">
+                                        <a class="dropdown-item waves-light waves-effect" href="#">Insert</a>
+                                        <a class="dropdown-item waves-light waves-effect" href="#">Update</a>
+                                        <a class="dropdown-item waves-light waves-effect" href="#">Delete</a>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item waves-light waves-effect" href="#">disable</a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><a href="#!"><i class="icofont icofont-social-facebook bg-facebook social-icon"></i></a>
+                                <div class="table-contain">
+                                    <h6>FaceBook ads</h6>
+                                    <p class="text-muted">6:00am- 8:00am</p>
+                                </div>
+                            </td>
+                            <td>
+                                <p class="text-muted">Softtech</p>
+                            </td>
+                            <td>
+                                <p class="text-muted">Softtech</p>
+                            </td>
+                            <td>
+                                <i class="icofont icofont-bird text-c-green"></i>
+                                <p class="m-l-10 text-c-green">6.45%</p>
+                            </td>
+                            <td><span>$5132</span></td>
+                            <td>
+                                <button class="btn btn-default btn-bg-c-blue btn-outline-default btn-round btn-action">Activate</button>
+                            </td>
+                            <td>
+                                <div class="dropdown-primary dropdown open">
+                                    <button class="btn btn-light dropdown-toggle" type="button" data-toggle="dropdown"><i class="icofont icofont-brand-flikr text-muted"></i>
+                                    </button>
+                                    <div class="dropdown-menu" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut">
+                                        <a class="dropdown-item waves-light waves-effect" href="#">Insert</a>
+                                        <a class="dropdown-item waves-light waves-effect" href="#">Update</a>
+                                        <a class="dropdown-item waves-light waves-effect" href="#">Delete</a>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item waves-light waves-effect" href="#">disable</a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><a href="#!"><i class="icofont icofont-social-facebook bg-facebook social-icon"></i></a>
+                                <div class="table-contain">
+                                    <h6>FaceBook ads</h6>
+                                    <p class="text-muted">6:00am- 8:00am</p>
+                                </div>
+                            </td>
+                            <td>
+                                <p class="text-muted">Softtech</p>
+                            </td>
+                            <td>
+                                <p class="text-muted">Softtech</p>
+                            </td>
+                            <td>
+                                <i class="icofont icofont-bird text-c-green"></i>
+                                <p class="m-l-10 text-c-green">6.45%</p>
+                            </td>
+                            <td><span>$5132</span></td>
+                            <td>
+                                <button class="btn btn-default btn-bg-c-blue btn-outline-default btn-round btn-action">Activate</button>
+                            </td>
+                            <td>
+                                <div class="dropdown-primary dropdown open">
+                                    <button class="btn btn-light dropdown-toggle" type="button" data-toggle="dropdown"><i class="icofont icofont-brand-flikr text-muted"></i>
+                                    </button>
+                                    <div class="dropdown-menu" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut">
+                                        <a class="dropdown-item waves-light waves-effect" href="#">Insert</a>
+                                        <a class="dropdown-item waves-light waves-effect" href="#">Update</a>
+                                        <a class="dropdown-item waves-light waves-effect" href="#">Delete</a>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item waves-light waves-effect" href="#">disable</a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
                       </tbody>
                   </table>
               </div>
 
           </div>
+      </div>
       </div>
   </div>
   <!-- Marketing End -->

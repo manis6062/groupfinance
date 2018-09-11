@@ -90,4 +90,10 @@ class UserController extends Controller
     {
        return view('backend.user.view');
     }
+
+
+    public function monthlyPayment(User $user)
+    {
+       return view('backend.user.monthlypayment');
+    }
 }

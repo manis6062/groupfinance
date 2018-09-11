@@ -31,4 +31,6 @@ Route::get('/users', 'UserController@show');
 Route::get('/users/create', 'UserController@create');
 Route::get('/users/edit', 'UserController@edit');
 Route::get('/users/view', 'UserController@view');
+Route::get('/users/monthlypayment', 'UserController@monthlyPayment');
+
 });
