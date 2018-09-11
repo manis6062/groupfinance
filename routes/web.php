@@ -21,7 +21,14 @@ Route::group(['middleware' => 'auth'] ,function(){
 
     Route::get('/', 'HomeController@backend')->name('home');
    Route::get('dashboard', 'HomeController@backend')->name('home');
-
 });
 
-// Route::get('/home', 'HomeController@index')->name('home');
+
+
+Route::group(['namespace' => 'Backend','middleware' => ['auth']],  function () {
+//    Users
+Route::get('/users', 'UserController@show');
+Route::get('/users/create', 'UserController@create');
+Route::get('/users/edit', 'UserController@edit');
+Route::get('/users/view', 'UserController@view');
+});
