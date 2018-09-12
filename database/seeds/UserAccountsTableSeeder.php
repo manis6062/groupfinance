@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class RolesTableSeeder extends Seeder
+class UserAccountsTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -11,7 +11,6 @@ class RolesTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Models\Roles::class, 30)->create();
-
+        factory(App\Models\UserAccounts::class, 20)->create();
     }
 }

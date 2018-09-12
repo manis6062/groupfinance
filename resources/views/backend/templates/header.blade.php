@@ -273,7 +273,7 @@ Menu                                  <i class="ti-angle-down"></i>
                                       <div class="media">
                                           <img class="d-flex align-self-center" src="backend/assets/images/user.png" alt="Generic placeholder image">
                                           <div class="media-body">
-                                              <h5 class="notification-user">Kurt Cobain</h5>
+                                              <h5 class="notification-user">{{Auth::user()->name}}</h5>
                                               <p class="notification-msg">Lorem ipsum dolor sit amet, consectetuer elit.</p>
                                               <span class="notification-time">30 minutes ago</span>
                                           </div>
@@ -310,7 +310,7 @@ Menu                                  <i class="ti-angle-down"></i>
                           <li class="user-profile header-notification">
                               <a href="#!">
                                   <img src="backend/assets/images/avatar-4.jpg" class="img-radius" alt="User-Profile-Image">
-                                  <span>Kurt Cobain</span>
+                                  <span>{{Auth::user()->name}}</span>
                                   <i class="ti-angle-down"></i>
                               </a>
                               <ul class="show-notification profile-notification">
@@ -335,9 +335,17 @@ Menu                                  <i class="ti-angle-down"></i>
                                       </a>
                                   </li>
                                   <li>
-                                  <a href="auth-normal-sign-in.html">
-                                      <i class="ti-layout-sidebar-left"></i> Logout
-                                  </a>
+
+                                        <a href="{{ route('logout') }}"
+                                        onclick="event.preventDefault();
+                                                 document.getElementById('logout-form').submit();">
+                                                 <i class="ti-layout-sidebar-left"></i>
+                                    Logout  
+                                    </a>
+                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                        {{ csrf_field() }}
+</form>
+
                               </li>
                               </ul>
                           </li>
@@ -595,7 +603,7 @@ Menu                                  <i class="ti-angle-down"></i>
                               <div class="main-menu-header">
                                   <img class="img-40 img-radius" src="backend/assets/images/avatar-4.jpg" alt="User-Profile-Image">
                                   <div class="user-details">
-                                      <span>Kurt Cobain</span>
+                                      <span>{{Auth::user()->name}}</span>
                                       <span id="more-details">President<i class="ti-angle-down"></i></span>
                                   </div>
                               </div>

@@ -15,11 +15,12 @@ use Faker\Generator as Faker;
 
 
 $factory->define(App\Models\UserRoles::class, function (Faker $faker) {
-    static $number = 1;
+    static $user_id = 1;
+    static $role_id = 1;
 
     return [
-        'user_id' => App\Models\User::inRandomOrder()->first()->id,
-        'role_id' => $number++,
+        'user_id' => $user_id++,
+        'role_id' => $role_id++,
         'created_at' => date('Y-m-d H:i:s'),
         
     ];
