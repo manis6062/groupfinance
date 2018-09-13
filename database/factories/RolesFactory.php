@@ -15,7 +15,7 @@ use Faker\Generator as Faker;
 
 $factory->define(App\Models\Roles::class, function (Faker $faker) {
     return [
-        'name' => $faker->unique()->word,
+        'name' => $faker->randomElement($array = array ('superadmin', 'admin' , 'president' , 'vice_president' , 'finance_manager' , 'co_finance_manager' , 'executive_member' , 'ex_member' , 'member' , 'secretary' , 'co_secretary')),
         'description' => $faker->unique()->paragraph,
         'created_at' => date('Y-m-d H:i:s'),
         

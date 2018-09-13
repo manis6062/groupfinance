@@ -36,6 +36,19 @@ class User extends Authenticatable
             public function getFullName(){
                return $this->firstname . ' ' . $this->surname;
             }
+
+            public function profile()
+            {
+                return $this->hasOne('App\Models\Profile', 'user_id', 'id');       
+            }
+
+            public function userAccounts(){
+                return $this->belongsToMany('App\Models\Accounts', 'user_accounts' , 'user_id', 'id');
+            }
+
+            public function role(){
+                return $this->belongsToMany('App\Models\Roles', 'user_roles' , 'user_id', 'id');
+            }
    
        
 }

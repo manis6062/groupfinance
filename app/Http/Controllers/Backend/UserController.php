@@ -96,4 +96,10 @@ class UserController extends Controller
     {
        return view('backend.user.monthlypayment');
     }
+
+    public function accounts(User $user)
+    {
+       $users = User::all(); 
+       return view('backend.user.accounts' , compact('users'));
+    }
 }

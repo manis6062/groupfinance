@@ -75,7 +75,7 @@
                           <i class="ti-search"></i>
                       </a>
                       <a href="index.html">
-                          <img class="img-fluid" src="backend/assets/images/logo.png" alt="Theme-Logo" />
+                          <img class="img-fluid" src="{{url('backend/assets/images/logo.png')}}" alt="Theme-Logo" />
                       </a>
                       <a class="mobile-options">
                           <i class="ti-more"></i>
@@ -99,6 +99,7 @@
                               </a>
                           </li>
                           <li class="mega-menu-top">
+                              <span style="color:greenyellow">{{ucwords(Auth::user()->role->first()->name)}}</span>  
                               <a href="#">
 Menu                                  <i class="ti-angle-down"></i>
                               </a>
@@ -271,7 +272,7 @@ Menu                                  <i class="ti-angle-down"></i>
                                   </li>
                                   <li>
                                       <div class="media">
-                                          <img class="d-flex align-self-center" src="backend/assets/images/user.png" alt="Generic placeholder image">
+                                          <img class="d-flex align-self-center" src="{{url('images/profile_pic/thumb' . '/' . Auth::user()->profile->profile_pic)}}" alt="Generic placeholder image">
                                           <div class="media-body">
                                               <h5 class="notification-user">{{Auth::user()->name}}</h5>
                                               <p class="notification-msg">Lorem ipsum dolor sit amet, consectetuer elit.</p>
@@ -309,7 +310,7 @@ Menu                                  <i class="ti-angle-down"></i>
                           </li>
                           <li class="user-profile header-notification">
                               <a href="#!">
-                                  <img src="backend/assets/images/avatar-4.jpg" class="img-radius" alt="User-Profile-Image">
+                                  <img src="{{url('images/profile_pic/thumb' . '/' . Auth::user()->profile->profile_pic)}}" class="img-radius" alt="User-Profile-Image">
                                   <span>{{Auth::user()->name}}</span>
                                   <i class="ti-angle-down"></i>
                               </a>
@@ -375,7 +376,7 @@ Menu                                  <i class="ti-angle-down"></i>
                                       <h3>Page Preloading Effect</h3>
                                   </a>
                                   <a class="dummy-media-object" href="#!">
-                                      <img src="backend/assets/images/avatar-4.jpg" alt="DraggableDualViewSlideshow" />
+                                      <img src="{{url('images/profile_pic/thumb' . '/' . Auth::user()->profile->profile_pic)}}" alt="DraggableDualViewSlideshow" />
                                       <h3>Draggable Dual-View Slideshow</h3>
                                   </a>
                               </div>
@@ -442,7 +443,7 @@ Menu                                  <i class="ti-angle-down"></i>
                               </div>
                               <div class="media userlist-box" data-id="4" data-status="online" data-username="Alia" data-toggle="tooltip" data-placement="left" title="Alia">
                                   <a class="media-left" href="#!">
-                                      <img class="media-object" src="backend/assets/images/avatar-4.jpg" alt="Generic placeholder image">
+                                      <img class="media-object" src="{{url('images/profile_pic/thumb' . '/' . Auth::user()->profile->profile_pic)}}" alt="Generic placeholder image">
                                       <div class="live-status bg-success"></div>
                                   </a>
                                   <div class="media-body">
@@ -505,7 +506,7 @@ Menu                                  <i class="ti-angle-down"></i>
                               </div>
                               <div class="media userlist-box" data-id="11" data-status="offline" data-username="Loren Scofield" data-toggle="tooltip" data-placement="left" title="Loren Scofield">
                                   <a class="media-left" href="#!">
-                                      <img class="media-object" src="backend/assets/images/avatar-4.jpg" alt="Generic placeholder image">
+                                      <img class="media-object" src="{{url('images/profile_pic/thumb' . '/' . Auth::user()->profile->profile_pic)}}" alt="Generic placeholder image">
                                       <div class="live-status bg-danger"></div>
                                   </a>
                                   <div class="media-body">
@@ -601,7 +602,7 @@ Menu                                  <i class="ti-angle-down"></i>
                       <div class="pcoded-inner-navbar main-menu">
                           <div class="">
                               <div class="main-menu-header">
-                                  <img class="img-40 img-radius" src="backend/assets/images/avatar-4.jpg" alt="User-Profile-Image">
+                                  <img class="img-40 img-radius" src="{{url('images/profile_pic/thumb/'). Auth::user()->profile->profile_pic}}" alt="User-Profile-Image">
                                   <div class="user-details">
                                       <span>{{Auth::user()->name}}</span>
                                       <span id="more-details">President<i class="ti-angle-down"></i></span>

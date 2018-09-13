@@ -34,7 +34,7 @@ $factory->define(App\Models\Profile::class, function (Faker $faker) {
         'country_1' => $faker->country,
         'country_2' => $faker->country,
         'post_code' => $faker->postcode,
-        'profile_pic' => $faker->word,
+        'profile_pic' => $faker->randomElement($array = array ('1.jpg', '2.jpg' , '3.jpg' , '4.jpg' , '5.jpg')) ,
         'dob' => $faker->date($format = 'Y-m-d', $max = 'now'),
 
     ];
