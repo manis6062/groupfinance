@@ -81,6 +81,17 @@
 {{HTML::script('backend/assets/pages/dashboard/analytic-dashboard.js')}}
 {{HTML::script('backend/assets/js/SmoothScroll.js')}}
 
+  <!--Forms - Wizard js-->
+  {{HTML::script('backend/bower_components/jquery.cookie/js/jquery.cookie.js')}}
+  {{HTML::script('backend/bower_components/jquery.steps/js/jquery.steps.js')}}
+  {{HTML::script('backend/bower_components/jquery-validation/js/jquery.validate.js')}}
+
+  <!-- Validation js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script>
+  <script type="text/javascript" src="assets/pages/form-validation/validate.js"></script>
+  <!-- Custom js -->
+  {{HTML::script('backend/assets/pages/forms-wizard-validation/form-wizard.js')}}
 {{HTML::script('backend/assets/js/pcoded.min.js')}}
 {{HTML::script('backend/assets/js/demo-12.js')}}
 {{HTML::script('backend/assets/js/jquery.mCustomScrollbar.concat.min.js')}}

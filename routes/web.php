@@ -28,16 +28,13 @@ Route::group(['middleware' => 'auth'] ,function(){
 Route::group(['namespace' => 'Backend','middleware' => ['auth']],  function () {
 //    Users
 Route::get('/users', 'UserController@show');
-Route::get('/users/create', 'UserController@create');
-Route::get('/users/edit', 'UserController@edit');
-Route::get('/users/view', 'UserController@view');
-Route::get('/users/monthlypayment', 'UserController@monthlyPayment');
+Route::get('/user/create', 'UserController@create');
+Route::get('/user/edit', 'UserController@edit');
+Route::get('/user/view', 'UserController@view');
+Route::get('/user/monthlypayment', 'UserController@monthlyPayment');
 
 
 //    User Accounts
 Route::get('/user/accounts', 'UserController@accounts');
-Route::get('/users/create', 'UserController@create');
-Route::get('/users/edit', 'UserController@edit');
-Route::get('/users/view', 'UserController@view');
 
 });

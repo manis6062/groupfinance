@@ -100,6 +100,6 @@ class UserController extends Controller
     public function accounts(User $user)
     {
        $users = User::all(); 
-       return view('backend.user.accounts' , compact('users'));
+       return view('backend.user.user_accounts' , compact('users'));
     }
 }

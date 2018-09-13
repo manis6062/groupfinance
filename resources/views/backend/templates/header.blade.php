@@ -35,6 +35,11 @@
 
 {{HTML::style('backend/assets/pages/j-pro/css/j-pro-modern.css')}}
 
+   <!--forms-wizard css-->
+   {{HTML::style('backend/bower_components/jquery.steps/css/jquery.steps.css')}}
+
+   <link rel="stylesheet" type="text/css" href="../bower_components/jquery.steps/css/jquery.steps.css">
+
 {{HTML::style('backend/assets/css/style.css')}}
 {{HTML::style('backend/assets/css/jquery.mCustomScrollbar.css')}}
 {{HTML::style('backend/css/custom.css')}}
@@ -99,7 +104,7 @@
                               </a>
                           </li>
                           <li class="mega-menu-top">
-                              <span style="color:greenyellow">{{ucwords(Auth::user()->role->first()->name)}}</span>  
+                           
                               <a href="#">
 Menu                                  <i class="ti-angle-down"></i>
                               </a>
@@ -109,9 +114,14 @@ Menu                                  <i class="ti-angle-down"></i>
                                       <ul class="mega-menu-links">
                                           <li><a href="form-elements-component.html">Monthly Payment</a></li>                                    
                                           <li><a href="user-card.html">Events</a></li>
+                                          <li><a href="auth-lock-screen.html">Messages</a></li>
                                           <li><a href="user-profile.html">User Information</a></li>
+                                          <li><a href="auth-lock-screen.html">User Activity</a></li>
+                                          <li><a href="auth-lock-screen.html">Tasks</a></li>
                                           <li><a href="auth-lock-screen.html">Reports</a></li>
-                                          <li><a href="auth-lock-screen.html">Invitations</a></li>
+
+
+
                                       </ul>
                                   </li>
                                   <li class="col-sm-3">
@@ -241,8 +251,13 @@ Menu                                  <i class="ti-angle-down"></i>
                                   </li>
                               </ul>
                           </li>
+                        
+                             
                       </ul>
                       <ul class="nav-right">
+                            {{-- <li>
+                                    <span style="color:greenyellow">{{ucwords(Auth::user()->role->first()->name)}}</span> 
+                               </li> --}}
                           <li class="header-notification lng-dropdown">
                               <a href="#" id="dropdown-active-item">
                                   <i class="flag-icon flag-icon-gb m-r-5"></i> English
@@ -316,25 +331,11 @@ Menu                                  <i class="ti-angle-down"></i>
                               </a>
                               <ul class="show-notification profile-notification">
                                   <li>
-                                      <a href="#!">
-                                          <i class="ti-settings"></i> Settings
-                                      </a>
-                                  </li>
-                                  <li>
                                       <a href="user-profile.html">
                                           <i class="ti-user"></i> Profile
                                       </a>
                                   </li>
-                                  <li>
-                                      <a href="email-inbox.html">
-                                          <i class="ti-email"></i> My Messages
-                                      </a>
-                                  </li>
-                                  <li>
-                                      <a href="auth-lock-screen.html">
-                                          <i class="ti-lock"></i> Lock Screen
-                                      </a>
-                                  </li>
+                                 
                                   <li>
 
                                         <a href="{{ route('logout') }}"
