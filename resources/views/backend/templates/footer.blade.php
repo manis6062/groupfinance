@@ -46,29 +46,10 @@
 {{-- bower_components --}}
 
 
-
-{{HTML::script('backend/bower_components/jquery/js/jquery.min.js')}}
-{{HTML::script('backend/bower_components/jquery-ui/js/jquery-ui.min.js')}}
 {{HTML::script('backend/bower_components/popper.js/js/popper.min.js')}}
-{{HTML::script('backend/bower_components/bootstrap/js/bootstrap.min.js')}}
 {{HTML::script('backend/bower_components/jquery-slimscroll/js/jquery.slimscroll.js')}}
 {{HTML::script('backend/bower_components/modernizr/js/modernizr.js')}}
 {{HTML::script('backend/bower_components/modernizr/js/css-scrollbars.js')}}
-
-{{HTML::script('backend/bower_components/peity/js/jquery.peity.js')}}
-
-{{HTML::script('backend/bower_components/chart.js/js/Chart.js')}}
-
-{{HTML::script('backend/bower_components/d3/js/d3.js')}}
-{{HTML::script('backend/bower_components/nvd3/js/nv.d3.js')}}
-{{HTML::script('backend/assets/pages/chart/nv-chart/js/stream_layers.js')}}
-{{HTML::script('backend/assets/pages/widget/amchart/amcharts.js')}}
-{{HTML::script('backend/assets/pages/widget/amchart/pie.js')}}
-{{HTML::script('backend/assets/pages/widget/amchart/ammap.js')}}
-{{HTML::script('backend/assets/pages/widget/amchart/light.js')}}
-{{HTML::script('backend/assets/pages/widget/amchart/worldLow.js')}}
-{{HTML::script('backend/assets/pages/widget/amchart/continentsLow.js')}}
-{{HTML::script('backend/assets/pages/widget/amchart/light.js')}}
 
 {{HTML::script('backend/bower_components/raphael/js/raphael.min.js')}}
 {{HTML::script('backend/bower_components/morris.js/js/morris.js')}}
@@ -78,7 +59,6 @@
 {{HTML::script('backend/bower_components/i18next-xhr-backend/js/i18nextXHRBackend.min.js')}}
 {{HTML::script('backend/bower_components/i18next-browser-languagedetector/js/i18nextBrowserLanguageDetector.min.js')}}
 {{HTML::script('backend/bower_components/jquery-i18next/js/jquery-i18next.min.js')}}
-{{HTML::script('backend/assets/pages/dashboard/analytic-dashboard.js')}}
 {{HTML::script('backend/assets/js/SmoothScroll.js')}}
 
   <!--Forms - Wizard js-->
@@ -89,13 +69,20 @@
   <!-- Validation js -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script>
-  <script type="text/javascript" src="assets/pages/form-validation/validate.js"></script>
+  {{HTML::script('backend/assets/pages/form-validation/validate.js')}}
   <!-- Custom js -->
   {{HTML::script('backend/assets/pages/forms-wizard-validation/form-wizard.js')}}
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+  {{-- Datepicker --}}
+  {{HTML::script('backend/bower_components/bootstrap-datepicker/js/bootstrap-datepicker.min.js')}}
+  {{HTML::script('backend/assets/pages/advance-elements/bootstrap-datetimepicker.min.js')}}
+
 {{HTML::script('backend/assets/js/pcoded.min.js')}}
 {{HTML::script('backend/assets/js/demo-12.js')}}
 {{HTML::script('backend/assets/js/jquery.mCustomScrollbar.concat.min.js')}}
 {{HTML::script('backend/assets/js/script.js')}}
+{{HTML::script('backend/js/custom.js')}}
 </body>
 </body>
 

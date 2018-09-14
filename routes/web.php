@@ -29,6 +29,7 @@ Route::group(['namespace' => 'Backend','middleware' => ['auth']],  function () {
 //    Users
 Route::get('/users', 'UserController@show');
 Route::get('/user/create', 'UserController@create');
+Route::post('/user/store', 'UserController@store');
 Route::get('/user/edit', 'UserController@edit');
 Route::get('/user/view', 'UserController@view');
 Route::get('/user/monthlypayment', 'UserController@monthlyPayment');

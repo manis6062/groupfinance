@@ -1,5 +1,5 @@
 @extends('backend.templates.app')
-@section('title' , 'Create User')
+@section('title' , 'Group Finance | Create User')
 @section('content')
 <div class="page-body">
 
@@ -25,148 +25,174 @@
                 <div class="card-block">
                     <div class="row">
                         <div class="col-md-12">
-                            <div id="wizard2">
+                            <div id="wizard">
                                 <section>
-                                    <form class="wizard-form" id="verticle-wizard" action="#">
+                                {{-- {{ Form::open(["action" => "url('user/store')" , 'method' => 'POST' , 'id' => 'user-create-form' , 'class' => 'wizard-form']) }} --}}
+                                <form action="{{url('user/store')}}" "method"="POST"  "id" = "user-create-form"  "class" = "wizard-form">
                                         <h3> Registration </h3>
                                         <fieldset>
                                             <div class="form-group row">
                                                 <div class="col-sm-12">
-                                                    <label for="userName-2" class="block">User name *</label>
+                                                    <label for="userName" class="block">User name *</label>
                                                 </div>
                                                 <div class="col-sm-12">
-                                                    <input id="userName-22" name="userName" type="text" class=" form-control">
-                                                </div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <div class="col-sm-12">
-                                                    <label for="email-2" class="block">Email *</label>
-                                                </div>
-                                                <div class="col-sm-12">
-                                                    <input id="email-22" name="email" type="email" class=" form-control">
+                                                    <input id="userName" name="name" type="text" class=" form-control" required>
                                                 </div>
                                             </div>
                                             <div class="form-group row">
                                                 <div class="col-sm-12">
-                                                    <label for="password-2" class="block">Password *</label>
+                                                    <label for="email-22" class="block">Email *</label>
                                                 </div>
                                                 <div class="col-sm-12">
-                                                    <input id="password-22" name="password" type="password" class="form-control ">
+                                                    <input id="email-22" name="email" type="email" class=" form-control" required>
                                                 </div>
                                             </div>
                                             <div class="form-group row">
                                                 <div class="col-sm-12">
-                                                    <label for="confirm-2" class="block">Confirm Password *</label>
+                                                    <label for="password-22" class="block">Password *</label>
                                                 </div>
                                                 <div class="col-sm-12">
-                                                    <input id="confirm-22" name="confirm" type="password" class="form-control ">
+                                                    <input id="password-22" name="password" type="password" class="form-control" required>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <div class="col-sm-12">
+                                                    <label for="confirm_password" class="block">Confirm Password *</label>
+                                                </div>
+                                                <div class="col-sm-12">
+                                                    <input id="confirm_password" name="confirm_password" type="password" class="form-control" required>
                                                 </div>
                                             </div>
                                         </fieldset>
                                         <h3> General information </h3>
                                         <fieldset>
+                                             
                                             <div class="form-group row">
+                                      <div class="col-sm-6">
+
                                                 <div class="col-sm-12">
-                                                    <label for="name-2" class="block">First name *</label>
+                                                    <label for="first_name" class="block">First name *</label>
                                                 </div>
                                                 <div class="col-sm-12">
-                                                    <input id="name-22" name="name" type="text" class="form-control">
+                                                    <input id="first_name" name="first_name" type="text" class="form-control" required>
                                                 </div>
+                                      </div>
+                                      <div class="col-sm-6">
+
+                                            <div class="col-sm-12">
+                                                <label for="first_name" class="block">Last name *</label>
+                                            </div>
+                                            <div class="col-sm-12">
+                                                <input id="last_name" name="last_name" type="text" class="form-control" required>
+                                            </div>
+                                  </div>
                                             </div>
                                             <div class="form-group row">
+                                                    <div class="col-sm-6">
                                                 <div class="col-sm-12">
-                                                    <label for="surname-2" class="block">Last name *</label>
+                                                    <label for="phone" class="block">Phone No. *</label>
                                                 </div>
                                                 <div class="col-sm-12">
-                                                    <input id="surname-22" name="surname" type="text" class="form-control">
+                                                    <input id="phone" name="phone" type="number" class="form-control phone" required>
                                                 </div>
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                            <div class="col-sm-12">
+                                                                    <label for="mobile" class="block">Mobile No. *</label>
+                                                                </div>
+                                                                <div class="col-sm-12">
+                                                                    <input id="mobile" name="mobile" type="number" class="form-control phone" required>
+                                                                </div>
+                                                                </div>
+                                            </div>
+                                            
+                                            <div class="form-group row">
+                                                    <div class="col-sm-6">
+                                                <div class="col-sm-12">
+                                                    <label for="dob" class="block">Date Of Birth</label>
+                                                </div>
+                                                <div class="col-sm-12">
+                                                    <input id="dob" name="dob" type="text" class="form-control date-control datepicker">
+                                                </div>
+                                                    </div>
+
+                                                    <div class="col-sm-6">
+                                                            <div class="col-sm-12">
+                                                                    <label for="gender" class="block">Gender</label>
+                                                                </div>
+                                                            <div class="col-sm-12">
+                                                                    <select class="form-control" name="gender">
+                                                                        <option value="male">Male</option>
+                                                                        <option value="female">Female</option>
+                                                                        <option value="others">Others</option>
+                                                                    </select>
+                                                                </div>
+                                                                </div>
                                             </div>
                                             <div class="form-group row">
-                                                <div class="col-sm-12">
-                                                    <label for="phone-2" class="block">Phone #</label>
+                                                    <div class="col-sm-12">
+                                                        <label for="family_details" class="block">Education</label>
+                                                    </div>
+                                                    <div class="col-sm-12">
+                                                        <textarea name="education" class="form-control ">
+    
+                                                        </textarea>
+                                                
+                                                    </div>
                                                 </div>
-                                                <div class="col-sm-12">
-                                                    <input id="phone-22" name="phone" type="number" class="form-control phone">
-                                                </div>
-                                            </div>
                                             <div class="form-group row">
-                                                <div class="col-sm-12">
-                                                    <label for="date" class="block">Date Of Birth</label>
+                                                    <div class="col-sm-12">
+                                                        <label for="family_details" class="block">Bio</label>
+                                                    </div>
+                                                    <div class="col-sm-12">
+                                                        <textarea name="bio" class="form-control ">
+    
+                                                        </textarea>
+                                                
+                                                    </div>
                                                 </div>
-                                                <div class="col-sm-12">
-                                                    <input id="date22" name="Date Of Birth" type="text" class="form-control date-control">
-                                                </div>
-                                            </div>
                                         
                                         </fieldset>
-                                        {{-- <h3> Education </h3>
-                                        <fieldset>
-                                            <div class="form-group row">
-                                                <div class="col-sm-12">
-                                                    <label for="University-2" class="block">University</label>
-                                                </div>
-                                                <div class="col-sm-12">
-                                                    <input id="University-22" name="University" type="text" class="form-control required">
-                                                </div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <div class="col-sm-12">
-                                                    <label for="Country-2" class="block">Country</label>
-                                                </div>
-                                                <div class="col-sm-12">
-                                                    <input id="Country-22" name="Country" type="text" class="form-control required">
-                                                </div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <div class="col-sm-12">
-                                                    <label for="Degreelevel-2" class="block">Degree level #</label>
-                                                </div>
-                                                <div class="col-sm-12">
-                                                    <input id="Degreelevel-22" name="Degree level" type="text" class="form-control required phone">
-                                                </div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <div class="col-sm-12">
-                                                    <label for="datejoin" class="block">Date Join</label>
-                                                </div>
-                                                <div class="col-sm-12">
-                                                    <input id="datejoin2" name="Date Of Birth" type="text" class="form-control required">
-                                                </div>
-                                            </div>
-                                        </fieldset> --}}
+                                        
                                         <h3> Account Details </h3>
                                         <fieldset>
                                             <div class="form-group row">
                                                 <div class="col-sm-12">
-                                                    <label for="University-2" class="block">Post Code</label>
+                                                    <label for="post_code" class="block">Post Code</label>
                                                 </div>
                                                 <div class="col-sm-12">
-                                                    <input id="University-22" name="University" type="text" class="form-control required">
+                                                    <input id="post_code" name="post_code" type="text" class="form-control required">
                                                 </div>
                                             </div>
                                             <div class="form-group row">
                                                 <div class="col-sm-12">
-                                                    <label for="Country-2" class="block">Citizenship/Licence</label>
+                                                    <label for="citi_lice" class="block">Citizenship/Licence *</label>
                                                 </div>
                                             
                                                 <div class="col-sm-6">
-                                                        <input id="Country-22" name="Country" type="file" class="form-control">
+                                                        <input id="citi_lice" name="citizenship_licence" type="file" class="form-control" required>
                                                     </div>
                                             </div>
                                             <div class="form-group row">
                                                 <div class="col-sm-12">
-                                                    <label for="Degreelevel-2" class="block">Account Type</label>
+                                                    <label for="account_type" class="block">Account Type</label>
                                                 </div>
                                                 <div class="col-sm-12">
-                                                    <input id="Degreelevel-22" name="Degree level" type="text" class="form-control required phone">
-                                                </div>
+                                                        <select class="form-control required" name="account_type">
+                                                            <option>Lotus</option>
+                                                            <option>Jasmine</option>
+                                                            <option>Manipur</option>
+                                                            <option>Tripura</option>
+                                                            <option>Sikkim</option>
+                                                        </select>
+                                                    </div>
                                             </div>
                                             <div class="form-group row">
                                                 <div class="col-sm-12">
-                                                    <label for="datejoin" class="block">Family Details</label>
+                                                    <label for="family_details" class="block">Family Details</label>
                                                 </div>
                                                 <div class="col-sm-12">
-                                                    <textarea name="Family Details"class="form-control required">
+                                                    <textarea name="family_details" class="form-control required">
 
                                                     </textarea>
                                             
@@ -177,11 +203,12 @@
                                         <fieldset>
 
                                                 <div class="form-group row">
-
+                                                    <div class="col-sm-12">
+                                                        <label for="country" class="block">Country *</label>
+                                                    </div>
                                                         <div class="col-sm-12">
-                                                                <select name="country" class="form-control">
-                                                                        <option value="" selected>Select country</option>
-                                                                        <option value="Australia">Australia</option>
+                                                                <select name="country" class="form-control" required>
+                                                                        <option value="Australia">Nepal</option>
                                                                         <option value="Austria">Austria</option>
                                                                         <option value="Brazil">Brazil</option>
                                                                         <option value="Canada">Canada</option>
@@ -204,47 +231,33 @@
                                                                     </select>
                                                             </div>
                                                         </div>
-                                                       
-                                                    <div class="form-group row">
-
-                                                    <div class="col-sm-12">
-                                                            <select class="form-control required">
-                                                                <option>Select State</option>
-                                                                <option>Gujarat</option>
-                                                                <option>Kerala</option>
-                                                                <option>Manipur</option>
-                                                                <option>Tripura</option>
-                                                                <option>Sikkim</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                        
+                                                                                               
                                             <div class="form-group row">
                                                 <div class="col-sm-12">
-                                                    <label for="Position-2" class="block">City</label>
+                                                    <label for="city" class="block">City</label>
                                                 </div>
                                                 <div class="col-sm-12">
-                                                    <input id="Position-22" name="Position" type="text" class="form-control required">
+                                                    <input id="city" name="city" type="text" class="form-control">
                                                 </div>
                                             </div>
                                             <div class="form-group row">
                                                     <div class="col-sm-12">
-                                                        <label for="Position-2" class="block">Permanent Residence</label>
+                                                        <label for="address_1" class="block">Permanent Residence</label>
                                                     </div>
                                                     <div class="col-sm-12">
-                                                        <input id="Position-22" name="address_1" type="text" class="form-control required">
+                                                        <input id="address_1" name="address_1" type="text" class="form-control">
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
                                                         <div class="col-sm-12">
-                                                            <label for="Position-2" class="block">Current Residence</label>
+                                                            <label for="address_2" class="block">Current Residence *</label>
                                                         </div>
                                                         <div class="col-sm-12">
-                                                            <input id="Position-22" name="address_2" type="text" class="form-control required">
+                                                            <input id="address_2" name="address_2" type="text" class="form-control required">
                                                         </div>
                                                     </div>
                                         </fieldset>
-                                    </form>
+                                </form>
                                 </section>
                             </div>
                         </div>
@@ -253,6 +266,8 @@
             </div>
     </div>   
 </div>
+
+
 @endsection
 
 

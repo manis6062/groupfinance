@@ -30,19 +30,31 @@
 {{HTML::style('backend/assets/pages/menu-search/css/component.css')}}
 {{HTML::style('backend/bower_components/nvd3/css/nv.d3.css')}}
 
-{{HTML::style('backend/assets/pages/j-pro/css/demo.cs')}}
-{{HTML::style('backend/assets/pages/j-pro/css/font-awesome.min.css')}}
-
-{{HTML::style('backend/assets/pages/j-pro/css/j-pro-modern.css')}}
 
    <!--forms-wizard css-->
    {{HTML::style('backend/bower_components/jquery.steps/css/jquery.steps.css')}}
 
-   <link rel="stylesheet" type="text/css" href="../bower_components/jquery.steps/css/jquery.steps.css">
-
 {{HTML::style('backend/assets/css/style.css')}}
 {{HTML::style('backend/assets/css/jquery.mCustomScrollbar.css')}}
 {{HTML::style('backend/css/custom.css')}}
+{{HTML::style('backend/assets/pages/advance-elements/css/bootstrap-datetimepicker.css')}}
+
+
+ <!-- Select 2 css --> <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/css/select2.css" rel="stylesheet" />
+
+
+<script src="https://code.jquery.com/jquery-3.3.1.js"
+			  integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+              crossorigin="anonymous"></script>
+              <script
+			  src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"
+			  integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30="
+              crossorigin="anonymous"></script>
+              <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+              
+
+
+
 
 
 </head>
@@ -598,213 +610,6 @@ Menu                                  <i class="ti-angle-down"></i>
           <!-- Sidebar inner chat end-->
           <div class="pcoded-main-container">
               <div class="pcoded-wrapper">
-                  {{-- <nav class="pcoded-navbar">
-                      <div class="sidebar_toggle"><a href="#"><i class="icon-close icons"></i></a></div>
-                      <div class="pcoded-inner-navbar main-menu">
-                          <div class="">
-                              <div class="main-menu-header">
-                                  <img class="img-40 img-radius" src="{{url('images/profile_pic/thumb/'). Auth::user()->profile->profile_pic}}" alt="User-Profile-Image">
-                                  <div class="user-details">
-                                      <span>{{Auth::user()->name}}</span>
-                                      <span id="more-details">President<i class="ti-angle-down"></i></span>
-                                  </div>
-                              </div>
-
-                              <div class="main-menu-content">
-                                  <ul>
-                                      <li class="more-details">
-                                          <a href="user-profile.html"><i class="ti-user"></i>View Profile</a>
-                                          <a href="#!"><i class="ti-settings"></i>Settings</a>
-                                          <a href="auth-normal-sign-in.html"><i class="ti-layout-sidebar-left"></i>Logout</a>
-                                      </li>
-                                  </ul>
-                              </div>
-                          </div>
-                          <div class="pcoded-search">
-                              <span class="searchbar-toggle">  </span>
-                              <div class="pcoded-search-box ">
-                                  <input type="text" placeholder="Search">
-                                  <span class="search-icon"><i class="ti-search" aria-hidden="true"></i></span>
-                              </div>
-                          </div>
-                          <div class="pcoded-navigatio-lavel" data-i18n="nav.category.navigation">Navigation</div>
-                          <ul class="pcoded-item pcoded-left-item">
-                              <li class="pcoded-hasmenu active pcoded-trigger">
-                                  <a href="javascript:void(0)">
-                                      <span class="pcoded-micon"><i class="ti-home"></i><b>D</b></span>
-                                      <span class="pcoded-mtext" data-i18n="nav.dash.main">Users</span>
-                                      <span class="pcoded-mcaret"></span>
-                                  </a>
-                                  <ul class="pcoded-submenu">
-                                      <li class="">
-                                          <a href="index.html">
-                                              <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                              <span class="pcoded-mtext" data-i18n="nav.dash.default">Roles</span>
-                                              <span class="pcoded-mcaret"></span>
-                                          </a>
-                                      </li>
-                                      <li class="">
-                                          <a href="dashboard-ecommerce.html">
-                                              <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                              <span class="pcoded-mtext" data-i18n="nav.dash.ecommerce">Permissions</span>
-                                              <span class="pcoded-mcaret"></span>
-                                          </a>
-                                      </li>
-                                 
-                                  </ul>
-                              </li>
-                              <li class="pcoded-hasmenu">
-                                  <a href="javascript:void(0)">
-                                      <span class="pcoded-micon"><i class="ti-layout"></i><b>P</b></span>
-                                      <span class="pcoded-mtext" data-i18n="nav.page_layout.main">Page layouts</span>
-                                      <span class="pcoded-badge label label-warning">NEW</span>
-                                      <span class="pcoded-mcaret"></span>
-                                  </a>
-                                  <ul class="pcoded-submenu">
-
-                                      <li class=" pcoded-hasmenu">
-                                          <a href="javascript:void(0)">
-                                              <span class="pcoded-micon"><i class="icon-pie-chart"></i></span>
-                                              <span class="pcoded-mtext">Vertical</span>
-                                              <span class="pcoded-mcaret"></span>
-                                          </a>
-                                          <ul class="pcoded-submenu">
-                                              <li class=" ">
-                                                  <a href="menu-static.html">
-                                                      <span class="pcoded-micon"><i class="icon-chart"></i></span>
-                                                      <span class="pcoded-mtext" data-i18n="nav.page_layout.vertical.static-layout">Static Layout</span>
-                                                      <span class="pcoded-mcaret"></span>
-                                                  </a>
-                                              </li>
-                                              <li class=" ">
-                                                  <a href="menu-header-fixed.html">
-                                                      <span class="pcoded-micon"><i class="icon-chart"></i></span>
-                                                      <span class="pcoded-mtext" data-i18n="nav.page_layout.vertical.header-fixed">Header Fixed</span>
-                                                      <span class="pcoded-mcaret"></span>
-                                                  </a>
-                                              </li>
-                                              <li class=" ">
-                                                  <a href="menu-compact.html">
-                                                      <span class="pcoded-micon"><i class="icon-chart"></i></span>
-                                                      <span class="pcoded-mtext" data-i18n="nav.page_layout.vertical.compact">Compact</span>
-                                                      <span class="pcoded-mcaret"></span>
-                                                  </a>
-                                              </li>
-                                              <li class=" ">
-                                                  <a href="menu-sidebar.html">
-                                                      <span class="pcoded-micon"><i class="icon-chart"></i></span>
-                                                      <span class="pcoded-mtext" data-i18n="nav.page_layout.vertical.sidebar-fixed">Sidebar Fixed</span>
-                                                      <span class="pcoded-mcaret"></span>
-                                                  </a>
-                                              </li>
-
-                                          </ul>
-                                      </li>
-                                      <li class=" pcoded-hasmenu">
-                                          <a href="javascript:void(0)">
-                                              <span class="pcoded-micon"><i class="icon-pie-chart"></i></span>
-                                              <span class="pcoded-mtext" data-i18n="nav.page_layout.horizontal.main">Horizontal</span>
-                                              <span class="pcoded-mcaret"></span>
-                                          </a>
-                                          <ul class="pcoded-submenu">
-                                              <li class=" ">
-                                                  <a href="menu-horizontal-static.html" target="_blank">
-                                                      <span class="pcoded-micon"><i class="icon-chart"></i></span>
-                                                      <span class="pcoded-mtext" data-i18n="nav.page_layout.horizontal.static-layout">Static Layout</span>
-                                                      <span class="pcoded-mcaret"></span>
-                                                  </a>
-                                              </li>
-                                              <li class=" ">
-                                                  <a href="menu-horizontal-fixed.html" target="_blank">
-                                                      <span class="pcoded-micon"><i class="icon-chart"></i></span>
-                                                      <span class="pcoded-mtext" data-i18n="nav.page_layout.horizontal.fixed-layout">Fixed layout</span>
-                                                      <span class="pcoded-mcaret"></span>
-                                                  </a>
-                                              </li>
-                                              <li class=" ">
-                                                  <a href="menu-horizontal-icon.html" target="_blank">
-                                                      <span class="pcoded-micon"><i class="icon-chart"></i></span>
-                                                      <span class="pcoded-mtext"  data-i18n="nav.page_layout.horizontal.static-with-icon">Static With Icon</span>
-                                                      <span class="pcoded-mcaret"></span>
-                                                  </a>
-                                              </li>
-                                              <li class=" ">
-                                                  <a href="menu-horizontal-icon-fixed.html" target="_blank">
-                                                      <span class="pcoded-micon"><i class="icon-chart"></i></span>
-                                                      <span class="pcoded-mtext" data-i18n="nav.page_layout.horizontal.fixed-with-icon">Fixed With Icon</span>
-                                                      <span class="pcoded-mcaret"></span>
-                                                  </a>
-                                              </li>
-                                          </ul>
-                                      </li>
-                                      <li class=" ">
-                                          <a href="menu-bottom.html">
-                                              <span class="pcoded-micon"><i class="icon-pie-chart"></i></span>
-                                              <span class="pcoded-mtext" data-i18n="nav.page_layout.bottom-menu">Bottom Menu</span>
-                                              <span class="pcoded-mcaret"></span>
-                                          </a>
-                                      </li>
-                                      <li class=" ">
-                                          <a href="box-layout.html" target="_blank">
-                                              <span class="pcoded-micon"><i class="icon-pie-chart"></i></span>
-                                              <span class="pcoded-mtext" data-i18n="nav.page_layout.box-layout">Box Layout</span>
-                                              <span class="pcoded-mcaret"></span>
-                                          </a>
-                                      </li>
-                                      <li class=" ">
-                                          <a href="menu-rtl.html" target="_blank">
-                                              <span class="pcoded-micon"><i class="icon-pie-chart"></i></span>
-                                              <span class="pcoded-mtext" data-i18n="nav.page_layout.rtl">RTL</span>
-                                              <span class="pcoded-mcaret"></span>
-                                          </a>
-                                      </li>
-
-                                  </ul>
-                              </li>
-                              <li class="">    <a href="navbar-light.html">        <span class="pcoded-micon"><i class="ti-layout-cta-right"></i><b>N</b></span>        <span class="pcoded-mtext" data-i18n="nav.navigate.main">Navigation</span>        <span class="pcoded-mcaret"></span>    </a></li>
-                              <li class="pcoded-hasmenu">
-                                  <a href="javascript:void(0)">
-                                      <span class="pcoded-micon"><i class="ti-view-grid"></i><b>W</b></span>
-                                      <span class="pcoded-mtext"  data-i18n="nav.widget.main">Widget</span>
-                                      <span class="pcoded-badge label label-danger">100+</span>
-                                      <span class="pcoded-mcaret"></span>
-                                  </a>
-                                  <ul class="pcoded-submenu">
-                                      <li class=" ">
-                                          <a href="widget-statistic.html">
-                                              <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                              <span class="pcoded-mtext" data-i18n="nav.navigate.navbar">Statistic</span>
-                                              <span class="pcoded-mcaret"></span>
-                                          </a>
-                                      </li>
-                                      <li class=" ">
-                                          <a href="widget-data.html">
-                                              <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                              <span class="pcoded-mtext" data-i18n="nav.navigate.navbar-inverse">Data</span>
-                                              <span class="pcoded-mcaret"></span>
-                                          </a>
-                                      </li>
-                                      <li class=" ">
-                                          <a href="widget-chart.html">
-                                              <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                              <span class="pcoded-mtext"  data-i18n="nav.navigate.navbar-with-elements">Chart Widget</span>
-                                              <span class="pcoded-mcaret"></span>
-                                          </a>
-                                      </li>
-                                      <li class=" ">
-                                          <a href="widget-chart-advance.html">
-                                              <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                              <span class="pcoded-mtext"  data-i18n="nav.navigate.navbar-with-elements">Advance Widgets</span>
-                                              <span class="pcoded-badge label label-info">25+</span>
-                                              <span class="pcoded-mcaret"></span>
-                                          </a>
-                                      </li>
-                                  </ul>
-                              </li>
-                          </ul>
-                        
-                      </div>
-                  </nav> --}}
                   <div class="pcoded-content">
                       <div class="pcoded-inner-content">
                           <div class="main-body">
