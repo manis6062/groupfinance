@@ -77,7 +77,9 @@
   {{-- Datepicker --}}
   {{HTML::script('backend/bower_components/bootstrap-datepicker/js/bootstrap-datepicker.min.js')}}
   {{HTML::script('backend/assets/pages/advance-elements/bootstrap-datetimepicker.min.js')}}
-
+<!-- notification js -->
+{{HTML::script('backend/assets/js/bootstrap-growl.min.js')}}
+{{HTML::script('backend/assets/pages/notification/notification.js')}}
 {{HTML::script('backend/assets/js/pcoded.min.js')}}
 {{HTML::script('backend/assets/js/demo-12.js')}}
 {{HTML::script('backend/assets/js/jquery.mCustomScrollbar.concat.min.js')}}

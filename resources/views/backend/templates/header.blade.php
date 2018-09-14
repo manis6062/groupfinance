@@ -29,18 +29,20 @@
 {{HTML::style('backend/assets/pages/flag-icon/flag-icon.min.css')}}
 {{HTML::style('backend/assets/pages/menu-search/css/component.css')}}
 {{HTML::style('backend/bower_components/nvd3/css/nv.d3.css')}}
+  <!-- Notification.css -->
+  {{HTML::style('backend/assets/pages/notification/notification.css')}}
 
+  <!-- Select 2 css --> 
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/css/select2.css" rel="stylesheet" />
 
-   <!--forms-wizard css-->
+<!--forms-wizard css-->
    {{HTML::style('backend/bower_components/jquery.steps/css/jquery.steps.css')}}
 
 {{HTML::style('backend/assets/css/style.css')}}
 {{HTML::style('backend/assets/css/jquery.mCustomScrollbar.css')}}
 {{HTML::style('backend/css/custom.css')}}
 {{HTML::style('backend/assets/pages/advance-elements/css/bootstrap-datetimepicker.css')}}
-
-
- <!-- Select 2 css --> <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/css/select2.css" rel="stylesheet" />
+ 
 
 
 <script src="https://code.jquery.com/jquery-3.3.1.js"

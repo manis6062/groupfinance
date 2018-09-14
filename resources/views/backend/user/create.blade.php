@@ -27,16 +27,19 @@
                         <div class="col-md-12">
                             <div id="wizard">
                                 <section>
-                                {{-- {{ Form::open(["action" => "url('user/store')" , 'method' => 'POST' , 'id' => 'user-create-form' , 'class' => 'wizard-form']) }} --}}
-                                <form action="{{url('user/store')}}" "method"="POST"  "id" = "user-create-form"  "class" = "wizard-form">
-                                        <h3> Registration </h3>
+                                <form method="POST"  id = "user-create-form"  class = "wizard-form">
+                                    {{-- Ajax Form Action Slug --}}
+                                    {!! csrf_field() !!}
+                                    <input type="hidden" name="form_action" value="create_user">
+                                    <input type="hidden" name="ajax_url" id="path" value="{{url('/users/ajax')}}">
+                                        <h3> Login Information </h3>
                                         <fieldset>
                                             <div class="form-group row">
                                                 <div class="col-sm-12">
                                                     <label for="userName" class="block">User name *</label>
                                                 </div>
                                                 <div class="col-sm-12">
-                                                    <input id="userName" name="name" type="text" class=" form-control" required>
+                                                    <input id="userName" name="name" type="text" class=" form-control" >
                                                 </div>
                                             </div>
                                             <div class="form-group row">
@@ -44,7 +47,7 @@
                                                     <label for="email-22" class="block">Email *</label>
                                                 </div>
                                                 <div class="col-sm-12">
-                                                    <input id="email-22" name="email" type="email" class=" form-control" required>
+                                                    <input id="email-22" name="email" type="email" class=" form-control" >
                                                 </div>
                                             </div>
                                             <div class="form-group row">
@@ -52,7 +55,7 @@
                                                     <label for="password-22" class="block">Password *</label>
                                                 </div>
                                                 <div class="col-sm-12">
-                                                    <input id="password-22" name="password" type="password" class="form-control" required>
+                                                    <input id="password-22" name="password" type="password" class="form-control" >
                                                 </div>
                                             </div>
                                             <div class="form-group row">
@@ -60,7 +63,7 @@
                                                     <label for="confirm_password" class="block">Confirm Password *</label>
                                                 </div>
                                                 <div class="col-sm-12">
-                                                    <input id="confirm_password" name="confirm_password" type="password" class="form-control" required>
+                                                    <input id="confirm_password" name="confirm_password" type="password" class="form-control" >
                                                 </div>
                                             </div>
                                         </fieldset>
@@ -74,7 +77,7 @@
                                                     <label for="first_name" class="block">First name *</label>
                                                 </div>
                                                 <div class="col-sm-12">
-                                                    <input id="first_name" name="first_name" type="text" class="form-control" required>
+                                                    <input id="first_name" name="first_name" type="text" class="form-control" >
                                                 </div>
                                       </div>
                                       <div class="col-sm-6">
@@ -83,7 +86,7 @@
                                                 <label for="first_name" class="block">Last name *</label>
                                             </div>
                                             <div class="col-sm-12">
-                                                <input id="last_name" name="last_name" type="text" class="form-control" required>
+                                                <input id="last_name" name="last_name" type="text" class="form-control" >
                                             </div>
                                   </div>
                                             </div>
@@ -93,7 +96,7 @@
                                                     <label for="phone" class="block">Phone No. *</label>
                                                 </div>
                                                 <div class="col-sm-12">
-                                                    <input id="phone" name="phone" type="number" class="form-control phone" required>
+                                                    <input id="phone" name="phone" type="number" class="form-control phone" >
                                                 </div>
                                                     </div>
                                                     <div class="col-sm-6">
@@ -101,7 +104,7 @@
                                                                     <label for="mobile" class="block">Mobile No. *</label>
                                                                 </div>
                                                                 <div class="col-sm-12">
-                                                                    <input id="mobile" name="mobile" type="number" class="form-control phone" required>
+                                                                    <input id="mobile" name="mobile" type="number" class="form-control phone" >
                                                                 </div>
                                                                 </div>
                                             </div>
@@ -145,7 +148,7 @@
                                                         <label for="family_details" class="block">Bio</label>
                                                     </div>
                                                     <div class="col-sm-12">
-                                                        <textarea name="bio" class="form-control ">
+                                             <textarea name="bio" class="form-control">
     
                                                         </textarea>
                                                 
@@ -158,10 +161,10 @@
                                         <fieldset>
                                             <div class="form-group row">
                                                 <div class="col-sm-12">
-                                                    <label for="post_code" class="block">Post Code</label>
+                                                    <label for="post_code" class="block">Post Code *</label>
                                                 </div>
-                                                <div class="col-sm-12">
-                                                    <input id="post_code" name="post_code" type="text" class="form-control required">
+                                                <div class="col-sm-6">
+                                                    <input id="post_code" name="post_code" type="text" class="form-control ">
                                                 </div>
                                             </div>
                                             <div class="form-group row">
@@ -170,20 +173,19 @@
                                                 </div>
                                             
                                                 <div class="col-sm-6">
-                                                        <input id="citi_lice" name="citizenship_licence" type="file" class="form-control" required>
+                                                        <input id="citi_lice" name="citizenship_licence" type="file" class="form-control" >
                                                     </div>
                                             </div>
                                             <div class="form-group row">
                                                 <div class="col-sm-12">
-                                                    <label for="account_type" class="block">Account Type</label>
+                                                    <label for="account_type" class="block">Account Type *</label>
                                                 </div>
                                                 <div class="col-sm-12">
-                                                        <select class="form-control required" name="account_type">
-                                                            <option>Lotus</option>
-                                                            <option>Jasmine</option>
-                                                            <option>Manipur</option>
-                                                            <option>Tripura</option>
-                                                            <option>Sikkim</option>
+                                                        <select class="form-control " name="account_id">
+                                                            <option value="1">Lotus</option>
+                                                            <option value="2">Jasmine</option>
+                                                            <option value="3">Manipur</option>
+                                                          
                                                         </select>
                                                     </div>
                                             </div>
@@ -192,7 +194,7 @@
                                                     <label for="family_details" class="block">Family Details</label>
                                                 </div>
                                                 <div class="col-sm-12">
-                                                    <textarea name="family_details" class="form-control required">
+                                                    <textarea name="family_details" class="form-control ">
 
                                                     </textarea>
                                             
@@ -207,7 +209,7 @@
                                                         <label for="country" class="block">Country *</label>
                                                     </div>
                                                         <div class="col-sm-12">
-                                                                <select name="country" class="form-control" required>
+                                                                <select name="country" class="form-control" >
                                                                         <option value="Australia">Nepal</option>
                                                                         <option value="Austria">Austria</option>
                                                                         <option value="Brazil">Brazil</option>
@@ -253,7 +255,7 @@
                                                             <label for="address_2" class="block">Current Residence *</label>
                                                         </div>
                                                         <div class="col-sm-12">
-                                                            <input id="address_2" name="address_2" type="text" class="form-control required">
+                                                            <input id="address_2" name="address_2" type="text" class="form-control ">
                                                         </div>
                                                     </div>
                                         </fieldset>

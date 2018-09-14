@@ -22,14 +22,16 @@
   var validate = function(attributes, constraints, options) {
     options = v.extend({}, v.options, options);
 
-    var results = v.runValidations(attributes, constraints, options)
-      , attr
-      , validator;
+    var results = v.runValidations(attributes, constraints, options),
+      attr,
+      validator;
 
     for (attr in results) {
       for (validator in results[attr]) {
         if (v.isPromise(results[attr][validator])) {
-          throw new Error("Use validate.async if you want support for promises");
+          throw new Error(
+            "Use validate.async if you want support for promises"
+          );
         }
       }
     }
@@ -74,7 +76,10 @@
     // If you are using Q.js, RSVP or any other A+ compatible implementation
     // override this attribute to be the constructor of that promise.
     // Since jQuery promises aren't A+ compatible they won't work.
-    Promise: typeof Promise !== "undefined" ? Promise : /* istanbul ignore next */ null,
+    Promise:
+      typeof Promise !== "undefined"
+        ? Promise
+        : /* istanbul ignore next */ null,
 
     EMPTY_STRING_REGEXP: /^\s*$/,
 
@@ -82,14 +87,14 @@
     // Will return an array of the format:
     //     [{attribute: "<attribute name>", error: "<validation result>"}, ...]
     runValidations: function(attributes, constraints, options) {
-      var results = []
-        , attr
-        , validatorName
-        , value
-        , validators
-        , validator
-        , validatorOptions
-        , error;
+      var results = [],
+        attr,
+        validatorName,
+        value,
+        validators,
+        validator,
+        validatorOptions,
+        error;
 
       if (v.isDomElement(attributes) || v.isJqueryElement(attributes)) {
         attributes = v.collectFormValues(attributes);
@@ -103,13 +108,22 @@
         // attributes as well as the options and constraints passed in.
         // This is useful when you want to have different
         // validations depending on the attribute value.
-        validators = v.result(constraints[attr], value, attributes, attr, options, constraints);
+        validators = v.result(
+          constraints[attr],
+          value,
+          attributes,
+          attr,
+          options,
+          constraints
+        );
 
         for (validatorName in validators) {
           validator = v.validators[validatorName];
 
           if (!validator) {
-            error = v.format("Unknown validator %{name}", {name: validatorName});
+            error = v.format("Unknown validator %{name}", {
+              name: validatorName
+            });
             throw new Error(error);
           }
 
@@ -119,7 +133,14 @@
           // attributes as well as the options and constraints passed in.
           // This is useful when you want to have different
           // validations depending on the attribute value.
-          validatorOptions = v.result(validatorOptions, value, attributes, attr, options, constraints);
+          validatorOptions = v.result(
+            validatorOptions,
+            value,
+            attributes,
+            attr,
+            options,
+            constraints
+          );
           if (!validatorOptions) {
             continue;
           }
@@ -130,12 +151,14 @@
             globalOptions: options,
             attributes: attributes,
             options: validatorOptions,
-            error: validator.call(validator,
-                value,
-                validatorOptions,
-                attr,
-                attributes,
-                options)
+            error: validator.call(
+              validator,
+              value,
+              validatorOptions,
+              attr,
+              attributes,
+              options
+            )
           });
         }
       }
@@ -152,7 +175,7 @@
 
       var format = options.format || "grouped";
 
-      if (typeof v.formatters[format] === 'function') {
+      if (typeof v.formatters[format] === "function") {
         errors = v.formatters[format](errors);
       } else {
         throw new Error(v.format("Unknown format %{format}", options));
@@ -168,9 +191,11 @@
     async: function(attributes, constraints, options) {
       options = v.extend({}, v.async.options, options);
 
-      var WrapErrors = options.wrapErrors || function(errors) {
-        return errors;
-      };
+      var WrapErrors =
+        options.wrapErrors ||
+        function(errors) {
+          return errors;
+        };
 
       // Removes unknown attributes
       if (options.cleanAttributes !== false) {
@@ -180,16 +205,19 @@
       var results = v.runValidations(attributes, constraints, options);
 
       return new v.Promise(function(resolve, reject) {
-        v.waitForResults(results).then(function() {
-          var errors = v.processValidationResults(results, options);
-          if (errors) {
-            reject(new WrapErrors(errors, options, attributes, constraints));
-          } else {
-            resolve(attributes);
+        v.waitForResults(results).then(
+          function() {
+            var errors = v.processValidationResults(results, options);
+            if (errors) {
+              reject(new WrapErrors(errors, options, attributes, constraints));
+            } else {
+              resolve(attributes);
+            }
+          },
+          function(err) {
+            reject(err);
           }
-        }, function(err) {
-          reject(err);
-        });
+        );
       });
     },
 
@@ -198,7 +226,7 @@
         format: "flat",
         fullMessages: false
       });
-      return v({single: value}, {single: constraints}, options);
+      return v({ single: value }, { single: constraints }, options);
     },
 
     // Returns a promise that is resolved when all promises in the results array
@@ -208,18 +236,23 @@
     // with the value returned from the promise.
     waitForResults: function(results) {
       // Create a sequence of all the results starting with a resolved promise.
-      return results.reduce(function(memo, result) {
-        // If this result isn't a promise skip it in the sequence.
-        if (!v.isPromise(result.error)) {
-          return memo;
-        }
+      return results.reduce(
+        function(memo, result) {
+          // If this result isn't a promise skip it in the sequence.
+          if (!v.isPromise(result.error)) {
+            return memo;
+          }
 
-        return memo.then(function() {
-          return result.error.then(function(error) {
-            result.error = error || null;
+          return memo.then(function() {
+            return result.error.then(function(error) {
+              result.error = error || null;
+            });
           });
-        });
-      }, new v.Promise(function(r) { r(); })); // A resolved promise
+        },
+        new v.Promise(function(r) {
+          r();
+        })
+      ); // A resolved promise
     },
 
     // If the given argument is a call: function the and: function return the value
@@ -232,7 +265,7 @@
     // ```
     result: function(value) {
       var args = [].slice.call(arguments, 1);
-      if (typeof value === 'function') {
+      if (typeof value === "function") {
         value = value.apply(null, args);
       }
       return value;
@@ -241,12 +274,12 @@
     // Checks if the value is a number. This function does not consider NaN a
     // number like many other `isNumber` functions do.
     isNumber: function(value) {
-      return typeof value === 'number' && !isNaN(value);
+      return typeof value === "number" && !isNaN(value);
     },
 
     // Returns false if the object is not a function
     isFunction: function(value) {
-      return typeof value === 'function';
+      return typeof value === "function";
     },
 
     // A simple check to verify that the value is an integer. Uses `isNumber`
@@ -257,7 +290,7 @@
 
     // Checks if the value is a boolean
     isBoolean: function(value) {
-      return typeof value === 'boolean';
+      return typeof value === "boolean";
     },
 
     // Uses the `Object` function to check if the given argument is an object.
@@ -303,11 +336,13 @@
       if (typeof HTMLElement === "object") {
         return o instanceof HTMLElement;
       } else {
-        return o &&
+        return (
+          o &&
           typeof o === "object" &&
           o !== null &&
           o.nodeType === 1 &&
-          typeof o.nodeName === "string";
+          typeof o.nodeName === "string"
+        );
       }
     },
 
@@ -357,21 +392,24 @@
     // If you want to write %{...} without having it replaced simply
     // prefix it with % like this `Foo: %%{foo}` and it will be returned
     // as `"Foo: %{foo}"`
-    format: v.extend(function(str, vals) {
-      if (!v.isString(str)) {
-        return str;
-      }
-      return str.replace(v.format.FORMAT_REGEXP, function(m0, m1, m2) {
-        if (m1 === '%') {
-          return "%{" + m2 + "}";
-        } else {
-          return String(vals[m2]);
+    format: v.extend(
+      function(str, vals) {
+        if (!v.isString(str)) {
+          return str;
         }
-      });
-    }, {
-      // Finds %{key} style patterns in the given string
-      FORMAT_REGEXP: /(%?)%\{([^\}]+)\}/g
-    }),
+        return str.replace(v.format.FORMAT_REGEXP, function(m0, m1, m2) {
+          if (m1 === "%") {
+            return "%{" + m2 + "}";
+          } else {
+            return String(vals[m2]);
+          }
+        });
+      },
+      {
+        // Finds %{key} style patterns in the given string
+        FORMAT_REGEXP: /(%?)%\{([^\}]+)\}/g
+      }
+    ),
 
     // "Prettifies" the given string.
     // Prettifying means replacing [.\_-] with spaces as well as splitting
@@ -387,7 +425,11 @@
       }
 
       if (v.isArray(str)) {
-        return str.map(function(s) { return v.prettify(s); }).join(", ");
+        return str
+          .map(function(s) {
+            return v.prettify(s);
+          })
+          .join(", ");
       }
 
       if (v.isObject(str)) {
@@ -397,18 +439,20 @@
       // Ensure the string is actually a string
       str = "" + str;
 
-      return str
-        // Splits keys separated by periods
-        .replace(/([^\s])\.([^\s])/g, '$1 $2')
-        // Removes backslashes
-        .replace(/\\+/g, '')
-        // Replaces - and - with space
-        .replace(/[_-]/g, ' ')
-        // Splits camel cased words
-        .replace(/([a-z])([A-Z])/g, function(m0, m1, m2) {
-          return "" + m1 + " " + m2.toLowerCase();
-        })
-        .toLowerCase();
+      return (
+        str
+          // Splits keys separated by periods
+          .replace(/([^\s])\.([^\s])/g, "$1 $2")
+          // Removes backslashes
+          .replace(/\\+/g, "")
+          // Replaces - and - with space
+          .replace(/[_-]/g, " ")
+          // Splits camel cased words
+          .replace(/([a-z])([A-Z])/g, function(m0, m1, m2) {
+            return "" + m1 + " " + m2.toLowerCase();
+          })
+          .toLowerCase()
+      );
     },
 
     stringifyValue: function(value) {
@@ -416,11 +460,11 @@
     },
 
     isString: function(value) {
-      return typeof value === 'string';
+      return typeof value === "string";
     },
 
     isArray: function(value) {
-      return {}.toString.call(value) === '[object Array]';
+      return {}.toString.call(value) === "[object Array]";
     },
 
     // Checks if the object is a hash, which is equivalent to an object that
@@ -453,26 +497,26 @@
         return undefined;
       }
 
-      var key = ""
-        , i
-        , escape = false;
+      var key = "",
+        i,
+        escape = false;
 
       for (i = 0; i < keypath.length; ++i) {
         switch (keypath[i]) {
-          case '.':
+          case ".":
             if (escape) {
               escape = false;
-              key += '.';
+              key += ".";
             } else {
               object = callback(object, key, false);
               key = "";
             }
             break;
 
-          case '\\':
+          case "\\":
             if (escape) {
               escape = false;
-              key += '\\';
+              key += "\\";
             } else {
               escape = true;
             }
@@ -507,13 +551,13 @@
     // would return:
     // {email: "foo@bar.com"}
     collectFormValues: function(form, options) {
-      var values = {}
-        , i
-        , j
-        , input
-        , inputs
-        , option
-        , value;
+      var values = {},
+        i,
+        j,
+        input,
+        inputs,
+        option,
+        value;
 
       if (v.isJqueryElement(form)) {
         form = form[0];
@@ -568,7 +612,10 @@
             }
           }
         } else {
-          value = v.sanitizeFormValue(input.options[input.selectedIndex].value, options);
+          value = v.sanitizeFormValue(
+            input.options[input.selectedIndex].value,
+            options
+          );
         }
         values[input.name] = value;
       }
@@ -614,7 +661,7 @@
         // Removes errors without a message
         if (v.isArray(error.error)) {
           error.error.forEach(function(msg) {
-            ret.push(v.extend({}, error, {error: msg}));
+            ret.push(v.extend({}, error, { error: msg }));
           });
         } else {
           ret.push(error);
@@ -630,26 +677,28 @@
 
       var ret = [];
       errors.forEach(function(errorInfo) {
-        var error = v.result(errorInfo.error,
-            errorInfo.value,
-            errorInfo.attribute,
-            errorInfo.options,
-            errorInfo.attributes,
-            errorInfo.globalOptions);
+        var error = v.result(
+          errorInfo.error,
+          errorInfo.value,
+          errorInfo.attribute,
+          errorInfo.options,
+          errorInfo.attributes,
+          errorInfo.globalOptions
+        );
 
         if (!v.isString(error)) {
           ret.push(errorInfo);
           return;
         }
 
-        if (error[0] === '^') {
+        if (error[0] === "^") {
           error = error.slice(1);
         } else if (options.fullMessages !== false) {
           error = v.capitalize(v.prettify(errorInfo.attribute)) + " " + error;
         }
         error = error.replace(/\\\^/g, "^");
-        error = v.format(error, {value: v.stringifyValue(errorInfo.value)});
-        ret.push(v.extend({}, errorInfo, {error: error}));
+        error = v.format(error, { value: v.stringifyValue(errorInfo.value) });
+        ret.push(v.extend({}, errorInfo, { error: error }));
       });
       return ret;
     },
@@ -677,7 +726,9 @@
     // ["<message 1>", "<message 2>"]
     flattenErrorsToArray: function(errors) {
       return errors
-        .map(function(error) { return error.error; })
+        .map(function(error) {
+          return error.error;
+        })
         .filter(function(value, index, self) {
           return self.indexOf(value) === index;
         });
@@ -692,9 +743,9 @@
       }
 
       function buildObjectWhitelist(whitelist) {
-        var ow = {}
-          , lastObject
-          , attr;
+        var ow = {},
+          lastObject,
+          attr;
         for (attr in whitelist) {
           if (!whitelist[attr]) {
             continue;
@@ -709,9 +760,9 @@
           return attributes;
         }
 
-        var ret = v.extend({}, attributes)
-          , w
-          , attribute;
+        var ret = v.extend({}, attributes),
+          w,
+          attribute;
 
         for (attribute in attributes) {
           w = whitelist[attribute];
@@ -742,7 +793,9 @@
       } else {
         root.validate = validate;
         if (validate.isFunction(define) && define.amd) {
-          define([], function () { return validate; });
+          define([], function() {
+            return validate;
+          });
         }
       }
     },
@@ -776,40 +829,51 @@
 
       options = v.extend({}, this.options, options);
 
-      var is = options.is
-        , maximum = options.maximum
-        , minimum = options.minimum
-        , tokenizer = options.tokenizer || function(val) { return val; }
-        , err
-        , errors = [];
+      var is = options.is,
+        maximum = options.maximum,
+        minimum = options.minimum,
+        tokenizer =
+          options.tokenizer ||
+          function(val) {
+            return val;
+          },
+        err,
+        errors = [];
 
       value = tokenizer(value);
       var length = value.length;
-      if(!v.isNumber(length)) {
-        v.error(v.format("Attribute %{attr} has a non numeric value for `length`", {attr: attribute}));
+      if (!v.isNumber(length)) {
+        v.error(
+          v.format("Attribute %{attr} has a non numeric value for `length`", {
+            attr: attribute
+          })
+        );
         return options.message || this.notValid || "has an incorrect length";
       }
 
       // Is checks
       if (v.isNumber(is) && length !== is) {
-        err = options.wrongLength ||
+        err =
+          options.wrongLength ||
           this.wrongLength ||
           "is the wrong length (should be %{count} characters)";
-        errors.push(v.format(err, {count: is}));
+        errors.push(v.format(err, { count: is }));
       }
 
       if (v.isNumber(minimum) && length < minimum) {
-        err = options.tooShort ||
+        err =
+          options.tooShort ||
           this.tooShort ||
           "is too short (minimum is %{count} characters)";
-        errors.push(v.format(err, {count: minimum}));
+        errors.push(v.format(err, { count: minimum }));
       }
 
       if (v.isNumber(maximum) && length > maximum) {
-        err = options.tooLong ||
+        err =
+          options.tooLong ||
           this.tooLong ||
           "is too long (maximum is %{count} characters)";
-        errors.push(v.format(err, {count: maximum}));
+        errors.push(v.format(err, { count: maximum }));
       }
 
       if (errors.length > 0) {
@@ -824,17 +888,29 @@
 
       options = v.extend({}, this.options, options);
 
-      var errors = []
-        , name
-        , count
-        , checks = {
-            greaterThan:          function(v, c) { return v > c; },
-            greaterThanOrEqualTo: function(v, c) { return v >= c; },
-            equalTo:              function(v, c) { return v === c; },
-            lessThan:             function(v, c) { return v < c; },
-            lessThanOrEqualTo:    function(v, c) { return v <= c; },
-            divisibleBy:          function(v, c) { return v % c === 0; }
-          };
+      var errors = [],
+        name,
+        count,
+        checks = {
+          greaterThan: function(v, c) {
+            return v > c;
+          },
+          greaterThanOrEqualTo: function(v, c) {
+            return v >= c;
+          },
+          equalTo: function(v, c) {
+            return v === c;
+          },
+          lessThan: function(v, c) {
+            return v < c;
+          },
+          lessThanOrEqualTo: function(v, c) {
+            return v <= c;
+          },
+          divisibleBy: function(v, c) {
+            return v % c === 0;
+          }
+        };
 
       // Strict will check that it is a valid looking number
       if (v.isString(value) && options.strict) {
@@ -844,37 +920,47 @@
         }
         pattern += "$";
 
-        if (!(new RegExp(pattern).test(value))) {
-          return options.message ||
+        if (!new RegExp(pattern).test(value)) {
+          return (
+            options.message ||
             options.notValid ||
             this.notValid ||
             this.message ||
-            "must be a valid number";
+            "must be a valid number"
+          );
         }
       }
 
       // Coerce the value to a number unless we're being strict.
-      if (options.noStrings !== true && v.isString(value) && !v.isEmpty(value)) {
+      if (
+        options.noStrings !== true &&
+        v.isString(value) &&
+        !v.isEmpty(value)
+      ) {
         value = +value;
       }
 
       // If it's not a number we shouldn't continue since it will compare it.
       if (!v.isNumber(value)) {
-        return options.message ||
+        return (
+          options.message ||
           options.notValid ||
           this.notValid ||
           this.message ||
-          "is not a number";
+          "is not a number"
+        );
       }
 
       // Same logic as above, sort of. Don't bother with comparisons if this
       // doesn't pass.
       if (options.onlyInteger && !v.isInteger(value)) {
-        return options.message ||
+        return (
+          options.message ||
           options.notInteger ||
           this.notInteger ||
           this.message ||
-          "must be an integer";
+          "must be an integer"
+        );
       }
 
       for (name in checks) {
@@ -884,109 +970,120 @@
           // For example the greaterThan check uses the message from
           // this.notGreaterThan so we capitalize the name and prepend "not"
           var key = "not" + v.capitalize(name);
-          var msg = options[key] ||
+          var msg =
+            options[key] ||
             this[key] ||
             this.message ||
             "must be %{type} %{count}";
 
-          errors.push(v.format(msg, {
-            count: count,
-            type: v.prettify(name)
-          }));
+          errors.push(
+            v.format(msg, {
+              count: count,
+              type: v.prettify(name)
+            })
+          );
         }
       }
 
       if (options.odd && value % 2 !== 1) {
-        errors.push(options.notOdd ||
-            this.notOdd ||
-            this.message ||
-            "must be odd");
+        errors.push(
+          options.notOdd || this.notOdd || this.message || "must be odd"
+        );
       }
       if (options.even && value % 2 !== 0) {
-        errors.push(options.notEven ||
-            this.notEven ||
-            this.message ||
-            "must be even");
+        errors.push(
+          options.notEven || this.notEven || this.message || "must be even"
+        );
       }
 
       if (errors.length) {
         return options.message || errors;
       }
     },
-    datetime: v.extend(function(value, options) {
-      if (!v.isFunction(this.parse) || !v.isFunction(this.format)) {
-        throw new Error("Both the parse and format functions needs to be set to use the datetime/date validator");
+    datetime: v.extend(
+      function(value, options) {
+        if (!v.isFunction(this.parse) || !v.isFunction(this.format)) {
+          throw new Error(
+            "Both the parse and format functions needs to be set to use the datetime/date validator"
+          );
+        }
+
+        // Empty values are fine
+        if (!v.isDefined(value)) {
+          return;
+        }
+
+        options = v.extend({}, this.options, options);
+
+        var err,
+          errors = [],
+          earliest = options.earliest
+            ? this.parse(options.earliest, options)
+            : NaN,
+          latest = options.latest ? this.parse(options.latest, options) : NaN;
+
+        value = this.parse(value, options);
+
+        // 86400000 is the number of seconds in a day, this is used to remove
+        // the time from the date
+        if (isNaN(value) || (options.dateOnly && value % 86400000 !== 0)) {
+          err =
+            options.notValid ||
+            options.message ||
+            this.notValid ||
+            "must be a valid date";
+          return v.format(err, { value: arguments[0] });
+        }
+
+        if (!isNaN(earliest) && value < earliest) {
+          err =
+            options.tooEarly ||
+            options.message ||
+            this.tooEarly ||
+            "must be no earlier than %{date}";
+          err = v.format(err, {
+            value: this.format(value, options),
+            date: this.format(earliest, options)
+          });
+          errors.push(err);
+        }
+
+        if (!isNaN(latest) && value > latest) {
+          err =
+            options.tooLate ||
+            options.message ||
+            this.tooLate ||
+            "must be no later than %{date}";
+          err = v.format(err, {
+            date: this.format(latest, options),
+            value: this.format(value, options)
+          });
+          errors.push(err);
+        }
+
+        if (errors.length) {
+          return v.unique(errors);
+        }
+      },
+      {
+        parse: null,
+        format: null
       }
-
-      // Empty values are fine
-      if (!v.isDefined(value)) {
-        return;
-      }
-
-      options = v.extend({}, this.options, options);
-
-      var err
-        , errors = []
-        , earliest = options.earliest ? this.parse(options.earliest, options) : NaN
-        , latest = options.latest ? this.parse(options.latest, options) : NaN;
-
-      value = this.parse(value, options);
-
-      // 86400000 is the number of seconds in a day, this is used to remove
-      // the time from the date
-      if (isNaN(value) || options.dateOnly && value % 86400000 !== 0) {
-        err = options.notValid ||
-          options.message ||
-          this.notValid ||
-          "must be a valid date";
-        return v.format(err, {value: arguments[0]});
-      }
-
-      if (!isNaN(earliest) && value < earliest) {
-        err = options.tooEarly ||
-          options.message ||
-          this.tooEarly ||
-          "must be no earlier than %{date}";
-        err = v.format(err, {
-          value: this.format(value, options),
-          date: this.format(earliest, options)
-        });
-        errors.push(err);
-      }
-
-      if (!isNaN(latest) && value > latest) {
-        err = options.tooLate ||
-          options.message ||
-          this.tooLate ||
-          "must be no later than %{date}";
-        err = v.format(err, {
-          date: this.format(latest, options),
-          value: this.format(value, options)
-        });
-        errors.push(err);
-      }
-
-      if (errors.length) {
-        return v.unique(errors);
-      }
-    }, {
-      parse: null,
-      format: null
-    }),
+    ),
     date: function(value, options) {
-      options = v.extend({}, options, {dateOnly: true});
+      options = v.extend({}, options, { dateOnly: true });
       return v.validators.datetime.call(v.validators.datetime, value, options);
     },
     format: function(value, options) {
-      if (v.isString(options) || (options instanceof RegExp)) {
-        options = {pattern: options};
+      if (v.isString(options) || options instanceof RegExp) {
+        options = { pattern: options };
       }
 
       options = v.extend({}, this.options, options);
 
-      var message = options.message || this.message || "is invalid"
-        , pattern = options.pattern
-        , match;
+      var message = options.message || this.message || "is invalid",
+        pattern = options.pattern,
+        match;
 
       // Empty values are allowed
       if (!v.isDefined(value)) {
@@ -1010,16 +1107,17 @@
         return;
       }
       if (v.isArray(options)) {
-        options = {within: options};
+        options = { within: options };
       }
       options = v.extend({}, this.options, options);
       if (v.contains(options.within, value)) {
         return;
       }
-      var message = options.message ||
+      var message =
+        options.message ||
         this.message ||
         "^%{value} is not included in the list";
-      return v.format(message, {value: value});
+      return v.format(message, { value: value });
     },
     exclusion: function(value, options) {
       // Empty values are fine
@@ -1027,55 +1125,60 @@
         return;
       }
       if (v.isArray(options)) {
-        options = {within: options};
+        options = { within: options };
       }
       options = v.extend({}, this.options, options);
       if (!v.contains(options.within, value)) {
         return;
       }
-      var message = options.message || this.message || "^%{value} is restricted";
-      return v.format(message, {value: value});
+      var message =
+        options.message || this.message || "^%{value} is restricted";
+      return v.format(message, { value: value });
     },
-    email: v.extend(function(value, options) {
-      options = v.extend({}, this.options, options);
-      var message = options.message || this.message || "is not a valid email";
-      // Empty values are fine
-      if (!v.isDefined(value)) {
-        return;
+    email: v.extend(
+      function(value, options) {
+        options = v.extend({}, this.options, options);
+        var message = options.message || this.message || "is not a valid email";
+        // Empty values are fine
+        if (!v.isDefined(value)) {
+          return;
+        }
+        if (!v.isString(value)) {
+          return message;
+        }
+        if (!this.PATTERN.exec(value)) {
+          return message;
+        }
+      },
+      {
+        PATTERN: /^[a-z0-9\u007F-\uffff!#$%&'*+\/=?^_`{|}~-]+(?:\.[a-z0-9\u007F-\uffff!#$%&'*+\/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z]{2,}$/i
       }
-      if (!v.isString(value)) {
-        return message;
-      }
-      if (!this.PATTERN.exec(value)) {
-        return message;
-      }
-    }, {
-      PATTERN: /^[a-z0-9\u007F-\uffff!#$%&'*+\/=?^_`{|}~-]+(?:\.[a-z0-9\u007F-\uffff!#$%&'*+\/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z]{2,}$/i
-    }),
+    ),
     equality: function(value, options, attribute, attributes) {
       if (!v.isDefined(value)) {
         return;
       }
 
       if (v.isString(options)) {
-        options = {attribute: options};
+        options = { attribute: options };
       }
       options = v.extend({}, this.options, options);
-      var message = options.message ||
-        this.message ||
-        "is not equal to %{attribute}";
+      var message =
+        options.message || this.message || "is not equal to %{attribute}";
 
       if (v.isEmpty(options.attribute) || !v.isString(options.attribute)) {
         throw new Error("The attribute must be a non empty string");
       }
 
-      var otherValue = v.getDeepObjectValue(attributes, options.attribute)
-        , comparator = options.comparator || function(v1, v2) {
-          return v1 === v2;
-        };
+      var otherValue = v.getDeepObjectValue(attributes, options.attribute),
+        comparator =
+          options.comparator ||
+          function(v1, v2) {
+            return v1 === v2;
+          };
 
       if (!comparator(value, otherValue, options, attribute, attributes)) {
-        return v.format(message, {attribute: v.prettify(options.attribute)});
+        return v.format(message, { attribute: v.prettify(options.attribute) });
       }
     },
 
@@ -1088,9 +1191,9 @@
 
       options = v.extend({}, this.options, options);
 
-      var message = options.message || this.message || "is not a valid url"
-        , schemes = options.schemes || this.schemes || ['http', 'https']
-        , allowLocal = options.allowLocal || this.allowLocal || false;
+      var message = options.message || this.message || "is not a valid url",
+        schemes = options.schemes || this.schemes || ["http", "https"],
+        allowLocal = options.allowLocal || this.allowLocal || false;
 
       if (!v.isString(value)) {
         return message;
@@ -1100,7 +1203,9 @@
       var regex =
         "^" +
         // protocol identifier
-        "(?:(?:" + schemes.join("|") + ")://)" +
+        "(?:(?:" +
+        schemes.join("|") +
+        ")://)" +
         // user:pass authentication
         "(?:\\S+(?::\\S*)?@)?" +
         "(?:";
@@ -1119,28 +1224,28 @@
       }
 
       regex +=
-          // IP address dotted notation octets
-          // excludes loopback network 0.0.0.0
-          // excludes reserved space >= 224.0.0.0
-          // excludes network & broacast addresses
-          // (first & last IP address of each class)
-          "(?:[1-9]\\d?|1\\d\\d|2[01]\\d|22[0-3])" +
-          "(?:\\.(?:1?\\d{1,2}|2[0-4]\\d|25[0-5])){2}" +
-          "(?:\\.(?:[1-9]\\d?|1\\d\\d|2[0-4]\\d|25[0-4]))" +
+        // IP address dotted notation octets
+        // excludes loopback network 0.0.0.0
+        // excludes reserved space >= 224.0.0.0
+        // excludes network & broacast addresses
+        // (first & last IP address of each class)
+        "(?:[1-9]\\d?|1\\d\\d|2[01]\\d|22[0-3])" +
+        "(?:\\.(?:1?\\d{1,2}|2[0-4]\\d|25[0-5])){2}" +
+        "(?:\\.(?:[1-9]\\d?|1\\d\\d|2[0-4]\\d|25[0-4]))" +
         "|" +
-          // host name
-          "(?:(?:[a-z\\u00a1-\\uffff0-9]-*)*[a-z\\u00a1-\\uffff0-9]+)" +
-          // domain name
-          "(?:\\.(?:[a-z\\u00a1-\\uffff0-9]-*)*[a-z\\u00a1-\\uffff0-9]+)*" +
-          tld +
+        // host name
+        "(?:(?:[a-z\\u00a1-\\uffff0-9]-*)*[a-z\\u00a1-\\uffff0-9]+)" +
+        // domain name
+        "(?:\\.(?:[a-z\\u00a1-\\uffff0-9]-*)*[a-z\\u00a1-\\uffff0-9]+)*" +
+        tld +
         ")" +
         // port number
         "(?::\\d{2,5})?" +
         // resource path
         "(?:[/?#]\\S*)?" +
-      "$";
+        "$";
 
-      var PATTERN = new RegExp(regex, 'i');
+      var PATTERN = new RegExp(regex, "i");
       if (!PATTERN.exec(value)) {
         return message;
       }
@@ -1148,7 +1253,9 @@
   };
 
   validate.formatters = {
-    detailed: function(errors) {return errors;},
+    detailed: function(errors) {
+      return errors;
+    },
     flat: v.flattenErrorsToArray,
     grouped: function(errors) {
       var attr;
@@ -1163,16 +1270,20 @@
       var attr;
       errors = v.groupErrorsByAttribute(errors);
       for (attr in errors) {
-        errors[attr] = errors[attr].map(function(result) {
-          return result.validator;
-        }).sort();
+        errors[attr] = errors[attr]
+          .map(function(result) {
+            return result.validator;
+          })
+          .sort();
       }
       return errors;
     }
   };
 
   validate.exposeModule(validate, this, exports, module, define);
-}).call(this,
-        typeof exports !== 'undefined' ? /* istanbul ignore next */ exports : null,
-        typeof module !== 'undefined' ? /* istanbul ignore next */ module : null,
-        typeof define !== 'undefined' ? /* istanbul ignore next */ define : null);
+}.call(
+  this,
+  typeof exports !== "undefined" ? /* istanbul ignore next */ exports : null,
+  typeof module !== "undefined" ? /* istanbul ignore next */ module : null,
+  typeof define !== "undefined" ? /* istanbul ignore next */ define : null
+));

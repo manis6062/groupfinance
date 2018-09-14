@@ -1,5 +1,32 @@
 "use strict";
 $(document).ready(function() {
+  function notify(message, type) {
+    $.growl(
+      {
+        message: message
+      },
+      {
+        type: type,
+        allow_dismiss: false,
+        label: "Cancel",
+        className: "btn-xs btn-inverse",
+        placement: {
+          from: "top",
+          align: "right"
+        },
+        delay: 3000,
+        animate: {
+          enter: "animated fadeInRight",
+          exit: "animated fadeOutRight"
+        },
+        spacing: 10,
+        offset: {
+          x: 30,
+          y: 30
+        }
+      }
+    );
+  }
   // $('#date,#datejoin').bootstrapMaterialDatePicker({
   //        time: false,
   //        clearButton: true
@@ -72,14 +99,30 @@ $(document).ready(function() {
       },
       onFinished: function(event, currentIndex) {
         var form = $(this);
-        var url = form.attr("action");
+        var url = $('.content input[name="ajax_url"]').val();
         var data = form.serialize();
+        var form_action = $('.content input[name="form_action"]').val();
         $.ajax({
           type: "POST",
           url: url,
           data: form.serialize(), // serializes the form's elements.
-          success: function(data) {
-            alert(data); // show response from the php script.
+          success: function(response) {
+            // console.log(response.message[error]);
+            if (response.validation_error) {
+              alert("in");
+              for (var msg in response.message) {
+                alert(response.message[msg][0]);
+                // notify(response.message[msg][0], "inverse");
+              }
+            } else {
+              notify(response);
+            }
+          },
+          error: function(xhr, ajaxOptions, thrownError) {
+            // var message = JSON.parse(xhr.responseJSON.message);
+            // for (var msg in message) {
+            //   notify(message[msg][0], "inverse");
+            // }
           }
         });
 

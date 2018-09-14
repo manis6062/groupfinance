@@ -36,6 +36,7 @@ class CreateProfileTable extends Migration
             $table->string('post_code')->nullable();
             $table->string('dob')->nullable();
             $table->string('profile_pic')->nullable();
+            $table->string('type')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });
