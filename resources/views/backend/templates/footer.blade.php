@@ -71,7 +71,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script>
   {{HTML::script('backend/assets/pages/form-validation/validate.js')}}
   <!-- Custom js -->
-  {{HTML::script('backend/assets/pages/forms-wizard-validation/form-wizard.js')}}
+  {{HTML::script('backend/assets/pages/forms-wizard-validation/user-form-wizard.js')}}
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
   {{-- Datepicker --}}
