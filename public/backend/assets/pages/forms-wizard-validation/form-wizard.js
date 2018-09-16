@@ -1,5 +1,12 @@
 "use strict";
 $(document).ready(function() {
+  //validation error status code
+  const validation_status_code = 422;
+  const error_message = "Oops! Something went wrong. Please try again later.";
+  const insert_message = "Successfully Inserted";
+  const debugging = true;
+  const notify_style = "inverse";
+
   function notify(message, type) {
     $.growl(
       {
@@ -27,14 +34,6 @@ $(document).ready(function() {
       }
     );
   }
-  // $('#date,#datejoin').bootstrapMaterialDatePicker({
-  //        time: false,
-  //        clearButton: true
-  //    });
-  //  $("#example-date-inputS").bootstrapMaterialDatePicker({
-  //                time: false,
-  //                clearButton: true
-  //            });
 
   $("#basic-forms").steps({
     headerTag: "h3",
@@ -105,49 +104,44 @@ $(document).ready(function() {
         $.ajax({
           type: "POST",
           url: url,
+          dataType: "json",
           data: form.serialize(), // serializes the form's elements.
           success: function(response) {
-            // console.log(response.message[error]);
-            if (response.validation_error) {
-              alert("in");
-              for (var msg in response.message) {
-                alert(response.message[msg][0]);
-                // notify(response.message[msg][0], "inverse");
-              }
+            var json_response = JSON.parse(response);
+            // status code for validation
+            if (json_response.statuscode == validation_status_code) {
+              for (var errors in json_response.message)
+                notify(json_response.message[errors], notify_style);
             } else {
-              notify(response);
+              notify(json_response.message, notify_style);
+
+              //Get All Users
+              $.ajax({
+                type: "POST",
+                url: url,
+                dataType: "json",
+                data: { action: "show_users" },
+                success: function(res) {
+                  console.log(res);
+                },
+                error: function(xhr, ajaxOptions, thrownError) {
+                  if (debugging === true) {
+                    notify(thrownError, notify_style);
+                  }
+                }
+              });
+
+              console.log(json_response.data);
             }
           },
           error: function(xhr, ajaxOptions, thrownError) {
-            // var message = JSON.parse(xhr.responseJSON.message);
-            // for (var msg in message) {
-            //   notify(message[msg][0], "inverse");
-            // }
+            if (debugging === true) {
+              notify(thrownError, notify_style);
+            }
           }
         });
 
         event.preventDefault(); // avoid to execute the actual submit of the form.
-
-        alert("Submitted!");
-
-        // var username = $('.content input[name="name"]').val();
-        // var email = $('.content input[name="email"]').val();
-        // var password = $('.content input[name="password"]').val();
-        // var first_name = $('.content input[name="first_name"]').val();
-        // var last_name = $('.content input[name="last_name"]').val();
-        // var country = $('.content input[name="country"]').val();
-        // var address_1 = $('.content input[name="address_1"]').val();
-        // var address_2 = $('.content input[name="address_2"]').val();
-        // var phone = $('.content input[name="phone"]').val();
-        // var mobile = $('.content input[name="mobile"]').val();
-        // var job_title = $('.content input[name="job_title"]').val();
-        // var bio = $('.content input[name="bio"]').val();
-        // var family_details = $('.content input[name="family_details"]').val();
-        // var gender = $('.content input[name="gender"]').val();
-        // var education = $('.content input[name="education"]').val();
-        // var family_details = $('.content input[name="family_details"]').val();
-        // var dob = $('.content input[name="dob"]').val();
-        // var profile_pic = $('.content input[name="profile_pic"]').val();
       }
     })
     .validate({

@@ -8,6 +8,7 @@ namespace App\Http\Controllers\Backend;
   use App\Models\Profile;
   use App\Models\UserRoles;
   use App\Models\UserAccounts;
+  use Config;
 
 
   class UserAjaxController extends Controller
@@ -18,6 +19,10 @@ namespace App\Http\Controllers\Backend;
      switch($request->form_action){
         case 'create_user':
         $res =  $this->registerProcess($request);     
+        return \Response::json($res);    
+		break;
+		case 'show_users':
+        $res =  $this->getAllUsers();     
         return \Response::json($res);    
         break;
      }
@@ -36,10 +41,10 @@ namespace App\Http\Controllers\Backend;
 			'mobile' => 'required'
 			]);
 		if($v->fails()){
-			return \Response::json([
-				'validation_error' => true,
-				'message' => $v->errors(),
-			], 422); 
+			return json_encode(array
+			("error"=> true , 
+			"statuscode" => Config::get('constants.validation_status_code'), 
+			"message"=> $v->errors()));
 		 	}
 		$new_user = User::create(array(
             'name' => $request->name,
@@ -66,7 +71,12 @@ namespace App\Http\Controllers\Backend;
 					'account_id' => $request->account_id,
 					'user_id' => $new_user->id,
 					));
-	   return \Response::json("Successfully Created");    
+	  return json_encode(array
+			("error"=> false , 
+			"statuscode" => 200, 
+			"message "=> "insert_success",
+		"data" => $new_user));  
+
 				}catch(\Exception $ex){
 					throw new Exception($ex->getMessage());
 				}
@@ -77,6 +87,32 @@ namespace App\Http\Controllers\Backend;
 
 			
 		}
+
+		public function getAllUsers(){
+			try{
+			$input = $request->all();
+			$users = User::all();
+			if($users){
+				return json_encode(array
+				("error"=> false , 
+				"statuscode" => 200, 
+				"message "=> "insert_success",
+			"data" => $users));  
+			}else{
+				return false;
+			}
+		 
+			
+					}catch(\Exception $ex){
+						throw new Exception($ex->getMessage());
+					}
+	
+	
+	
+	
+	
+				
+			}
 
 
 
