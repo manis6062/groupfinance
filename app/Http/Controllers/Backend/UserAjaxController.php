@@ -1,121 +1,131 @@
 <?php 
 namespace App\Http\Controllers\Backend;
-  use Illuminate\Http\Request;
-  use App\Http\Requests;
-  use App\Http\Controllers\Controller;
-  use Exception;
-  use App\Models\User;
-  use App\Models\Profile;
-  use App\Models\UserRoles;
-  use App\Models\UserAccounts;
-  use Config;
+
+use Illuminate\Http\Request;
+use App\Http\Requests;
+use App\Http\Controllers\Controller;
+use Exception;
+use App\Models\User;
+use App\Models\Profile;
+use App\Models\UserRoles;
+use App\Models\UserAccounts;
+use Config;
 
 
-  class UserAjaxController extends Controller
-  {
+class UserAjaxController extends Controller
+{
 
-    public function index(Request $request){
+	public function index(Request $request)
+	{
 
-     switch($request->form_action){
-        case 'create_user':
-        $res =  $this->registerProcess($request);     
-        return \Response::json($res);    
-		break;
-		case 'show_users':
-        $res =  $this->getAllUsers();     
-        return \Response::json($res);    
-        break;
-     }
+		switch ($request->form_action) {
+			case 'create_user':
+				$res = $this->registerProcess($request);
+				return \Response::json($res);
+				break;
+			case 'show_users':
+				$res = $this->getAllUsers();
+				return \Response::json($res);
+				break;
+		}
 	}
-	
-	public function registerProcess(Request $request){
-        try{
-		$input = $request->all(); 
-		$v = \Validator::make($input,[
-			'name' => 'required|min:3|max:10|alpha',
-			'email' => 'required|email|unique:users,email',
-			'password' => 'required',
-			'first_name' => 'required|min:3|max:10|alpha',
-			'last_name' => 'required|min:3|max:10|alpha',
-			'phone' => 'required',
-			'mobile' => 'required'
+
+	public function registerProcess(Request $request)
+	{
+		try {
+			$input = $request->all();
+			$v = \Validator::make($input, [
+				'name' => 'required|min:3|max:10',
+				'email' => 'required|email|unique:users,email',
+				'password' => 'required',
+				'first_name' => 'required|min:3|max:10|alpha',
+				'last_name' => 'required|min:3|max:10|alpha',
+				'phone' => 'required',
+				'mobile' => 'required'
 			]);
-		if($v->fails()){
-			return json_encode(array
-			("error"=> true , 
-			"statuscode" => Config::get('constants.validation_status_code'), 
-			"message"=> $v->errors()));
-		 	}
-		$new_user = User::create(array(
-            'name' => $request->name,
-			'email' => $request->email,
-			'password' => bcrypt($request->password),
-			'status' => 'live',
-			'type' => '2',
+			if ($v->fails()) {
+				return json_encode(array(
+					"error" => true,
+					"statuscode" => Config::get('constants.validation_status_code'),
+					"message" => $v->errors()
+				));
+			}
+			$user = User::create(array(
+				'name' => $request->name,
+				'email' => $request->email,
+				'password' => bcrypt($request->password),
+				'status' => 'live',
+				'type' => '2',
 			));
 
-	   Profile::create(array(
-			    'user_id' => $new_user->id,
+			Profile::create(array(
+				'user_id' => $user->id,
 				'first_name' => $request->first_name,
 				'last_name' => $request->last_name,
 				'phone' => $request->phone,
 				'mobile' => $request->mobile,
-				));
+			));
 
-				UserRoles::create(array(
-					'role_id' => 1,
-					'user_id' => $new_user->id,
-					));
+			UserRoles::create(array(
+				'role_id' => 1,
+				'user_id' => $user->id,
+			));
 
-	   UserAccounts::create(array(
-					'account_id' => $request->account_id,
-					'user_id' => $new_user->id,
-					));
-	  return json_encode(array
-			("error"=> false , 
-			"statuscode" => 200, 
-			"message "=> "insert_success",
-		"data" => $new_user));  
+			UserAccounts::create(array(
+				'account_id' => $request->account_id,
+				'user_id' => $user->id,
+			));
 
-				}catch(\Exception $ex){
-					throw new Exception($ex->getMessage());
-				}
+		//get all user details
+			$user_details = User::getUserDetails($user->id);
+			return json_encode(array(
+				"error" => false,
+				"statuscode" => 200,
+				"message " => "insert_success",
+				"data" => $user_details
+			));
 
-
-
-
-
-			
+		} catch (\Exception $ex) {
+			throw new Exception($ex->getMessage());
 		}
 
-		public function getAllUsers(){
-			try{
+
+
+
+
+
+	}
+
+	public function getAllUsers()
+	{
+		try {
 			$input = $request->all();
 			$users = User::all();
-			if($users){
-				return json_encode(array
-				("error"=> false , 
-				"statuscode" => 200, 
-				"message "=> "insert_success",
-			"data" => $users));  
-			}else{
+			if ($users) {
+				return json_encode(array(
+					"error" => false,
+					"statuscode" => 200,
+					"message " => "insert_success",
+					"data" => $users
+				));
+			} else {
 				return false;
 			}
-		 
-			
-					}catch(\Exception $ex){
-						throw new Exception($ex->getMessage());
-					}
-	
-	
-	
-	
-	
-				
-			}
+
+
+		} catch (\Exception $ex) {
+			throw new Exception($ex->getMessage());
+		}
 
 
 
 
 
- } 
+
+	}
+
+
+
+
+
+} 

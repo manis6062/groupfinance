@@ -1,5 +1,5 @@
 "use strict";
-$(document).ready(function() {
+$(document).ready(function () {
   //validation error status code
   const validation_status_code = 422;
   const error_message = "Oops! Something went wrong. Please try again later.";
@@ -8,31 +8,28 @@ $(document).ready(function() {
   const notify_style = "inverse";
 
   function notify(message, type) {
-    $.growl(
-      {
-        message: message
+    $.growl({
+      message: message
+    }, {
+      type: type,
+      allow_dismiss: false,
+      label: "Cancel",
+      className: "btn-xs btn-inverse",
+      placement: {
+        from: "top",
+        align: "right"
       },
-      {
-        type: type,
-        allow_dismiss: false,
-        label: "Cancel",
-        className: "btn-xs btn-inverse",
-        placement: {
-          from: "top",
-          align: "right"
-        },
-        delay: 3000,
-        animate: {
-          enter: "animated fadeInRight",
-          exit: "animated fadeOutRight"
-        },
-        spacing: 10,
-        offset: {
-          x: 30,
-          y: 30
-        }
+      delay: 3000,
+      animate: {
+        enter: "animated fadeInRight",
+        exit: "animated fadeOutRight"
+      },
+      spacing: 10,
+      offset: {
+        x: 30,
+        y: 30
       }
-    );
+    });
   }
 
   $("#basic-forms").steps({
@@ -64,7 +61,7 @@ $(document).ready(function() {
       transitionEffect: "slide",
       stepsOrientation: "vertical",
       autoFocus: true,
-      onStepChanging: function(event, currentIndex, newIndex) {
+      onStepChanging: function (event, currentIndex, newIndex) {
         // Allways allow previous action even if the current form is not valid!
         if (currentIndex > newIndex) {
           return true;
@@ -82,7 +79,7 @@ $(document).ready(function() {
         form.validate().settings.ignore = ":disabled,:hidden";
         return form.valid();
       },
-      onStepChanged: function(event, currentIndex, priorIndex) {
+      onStepChanged: function (event, currentIndex, priorIndex) {
         // Used to skip the "Warning" step if the user is old enough.
         if (currentIndex === 2 && Number($("#age-2").val()) >= 18) {
           form.steps("next");
@@ -92,11 +89,11 @@ $(document).ready(function() {
           form.steps("previous");
         }
       },
-      onFinishing: function(event, currentIndex) {
+      onFinishing: function (event, currentIndex) {
         form.validate().settings.ignore = ":disabled";
         return form.valid();
       },
-      onFinished: function(event, currentIndex) {
+      onFinished: function (event, currentIndex) {
         var form = $(this);
         var url = $('.content input[name="ajax_url"]').val();
         var data = form.serialize();
@@ -106,7 +103,7 @@ $(document).ready(function() {
           url: url,
           dataType: "json",
           data: form.serialize(), // serializes the form's elements.
-          success: function(response) {
+          success: function (response) {
             var json_response = JSON.parse(response);
             // status code for validation
             if (json_response.statuscode == validation_status_code) {
@@ -115,30 +112,12 @@ $(document).ready(function() {
             } else {
               notify(json_response.message, notify_style);
 
-              //Get All Users
-              $.ajax({
-                type: "POST",
-                url: url,
-                dataType: "json",
-                data: { action: "show_users" },
-                success: function(res) {
-                  console.log(res);
-                },
-                error: function(xhr, ajaxOptions, thrownError) {
-                  if (debugging === true) {
-                    notify(thrownError, notify_style);
-                  }
-                }
-              });
+
 
               console.log(json_response.data);
             }
           },
-          error: function(xhr, ajaxOptions, thrownError) {
-            if (debugging === true) {
-              notify(thrownError, notify_style);
-            }
-          }
+
         });
 
         event.preventDefault(); // avoid to execute the actual submit of the form.

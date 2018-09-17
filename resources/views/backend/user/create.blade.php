@@ -36,10 +36,10 @@
                                         <fieldset>
                                             <div class="form-group row">
                                                 <div class="col-sm-12">
-                                                    <label for="userName" class="block">User name *</label>
+                                                    <label for="name" class="block">User name *</label>
                                                 </div>
                                                 <div class="col-sm-12">
-                                                    <input id="userName" name="name" type="text" class=" form-control" >
+                                                    <input value = "{{ old('name') }}"id="name" name="name" type="text" class=" form-control" >
                                                 </div>
                                             </div>
                                             <div class="form-group row">
@@ -47,7 +47,7 @@
                                                     <label for="email-22" class="block">Email *</label>
                                                 </div>
                                                 <div class="col-sm-12">
-                                                    <input id="email-22" name="email" type="email" class=" form-control" >
+                                                    <input value = "{{ old('email') }}"id="email-22" name="email" type="email" class=" form-control" >
                                                 </div>
                                             </div>
                                             <div class="form-group row">
@@ -55,7 +55,7 @@
                                                     <label for="password-22" class="block">Password *</label>
                                                 </div>
                                                 <div class="col-sm-12">
-                                                    <input id="password-22" name="password" type="password" class="form-control" >
+                                                    <input value = "{{ old('password') }}"id="password-22" name="password" type="password" class="form-control" >
                                                 </div>
                                             </div>
                                             <div class="form-group row">
@@ -63,7 +63,7 @@
                                                     <label for="confirm_password" class="block">Confirm Password *</label>
                                                 </div>
                                                 <div class="col-sm-12">
-                                                    <input id="confirm_password" name="confirm_password" type="password" class="form-control" >
+                                                    <input id="confirm_password" value = "{{ old('confirm_password') }}name="confirm_password" type="password" class="form-control" >
                                                 </div>
                                             </div>
                                         </fieldset>
@@ -77,7 +77,7 @@
                                                     <label for="first_name" class="block">First name *</label>
                                                 </div>
                                                 <div class="col-sm-12">
-                                                    <input id="first_name" name="first_name" type="text" class="form-control" >
+                                                    <input value = "{{ old('first_name') }}"id="first_name" name="first_name" type="text" class="form-control" >
                                                 </div>
                                       </div>
                                       <div class="col-sm-6">
@@ -86,7 +86,7 @@
                                                 <label for="first_name" class="block">Last name *</label>
                                             </div>
                                             <div class="col-sm-12">
-                                                <input id="last_name" name="last_name" type="text" class="form-control" >
+                                                <input value = "{{ old('last_name') }}"id="last_name" name="last_name" type="text" class="form-control" >
                                             </div>
                                   </div>
                                             </div>
@@ -96,7 +96,7 @@
                                                     <label for="phone" class="block">Phone No. *</label>
                                                 </div>
                                                 <div class="col-sm-12">
-                                                    <input id="phone" name="phone" type="number" class="form-control phone" >
+                                                    <input value = "{{ old('phone') }}"id="phone" name="phone" type="number" class="form-control phone" >
                                                 </div>
                                                     </div>
                                                     <div class="col-sm-6">
@@ -104,7 +104,7 @@
                                                                     <label for="mobile" class="block">Mobile No. *</label>
                                                                 </div>
                                                                 <div class="col-sm-12">
-                                                                    <input id="mobile" name="mobile" type="number" class="form-control phone" >
+                                                                    <input value = "{{ old('mobile') }}"id="mobile" name="mobile" type="number" class="form-control phone" >
                                                                 </div>
                                                                 </div>
                                             </div>
@@ -115,18 +115,18 @@
                                                     <label for="dob" class="block">Date Of Birth</label>
                                                 </div>
                                                 <div class="col-sm-12">
-                                                    <input id="dob" name="dob" type="text" class="form-control date-control datepicker">
+                                                    <input value = "{{ old('dob') }}"id="dob" name="dob" type="text" class="form-control date-control datepicker">
                                                 </div>
                                                     </div>
 
-                                                    <div class="col-sm-6">
-                                                            <div class="col-sm-12">
-                                                                    <label for="gender" class="block">Gender</label>
-                                                                </div>
-                                                            <div class="col-sm-12">
-                                                                    <select class="form-control" name="gender">
-                                                                        <option value="male">Male</option>
-                                                                        <option value="female">Female</option>
+                <div class="col-sm-6">
+                        <div class="col-sm-12">
+                                <label for="gender" class="block">Gender</label>
+                            </div>
+                        <div class="col-sm-12">
+                                <select class="form-control" name="gender">
+            <option {{ old('gender') == "male"?"selected":"" }} value="male">Male</option>
+                                    <option value="female">Female</option>
                                                                         <option value="others">Others</option>
                                                                     </select>
                                                                 </div>
@@ -134,10 +134,11 @@
                                             </div>
                                             <div class="form-group row">
                                                     <div class="col-sm-12">
-                                                        <label for="family_details" class="block">Education</label>
+                                                        <label for="education" class="block">Education</label>
                                                     </div>
                                                     <div class="col-sm-12">
-                                                        <textarea name="education" class="form-control ">
+                                                        <textarea name="education"  class="form-control ">
+                                                            {{old('education')}}
     
                                                         </textarea>
                                                 
@@ -145,11 +146,12 @@
                                                 </div>
                                             <div class="form-group row">
                                                     <div class="col-sm-12">
-                                                        <label for="family_details" class="block">Bio</label>
+                                                        <label for="bio" class="block">Bio</label>
                                                     </div>
                                                     <div class="col-sm-12">
                                              <textarea name="bio" class="form-control">
-    
+                                                    {{old('bio')}}
+
                                                         </textarea>
                                                 
                                                     </div>
@@ -164,7 +166,7 @@
                                                     <label for="post_code" class="block">Post Code *</label>
                                                 </div>
                                                 <div class="col-sm-6">
-                                                    <input id="post_code" name="post_code" type="text" class="form-control ">
+                                                    <input value = "{{ old('post_code') }}"id="post_code" name="post_code" type="text" class="form-control ">
                                                 </div>
                                             </div>
                                             <div class="form-group row">
@@ -182,7 +184,7 @@
                                                 </div>
                                                 <div class="col-sm-12">
                                                         <select class="form-control " name="account_id">
-                                                            <option value="1">Lotus</option>
+                                                        <option value="1" {{old('account_id') == '1'?"selected" : ""}}>Lotus</option>
                                                             <option value="2">Jasmine</option>
                                                             <option value="3">Manipur</option>
                                                           
@@ -210,7 +212,7 @@
                                                     </div>
                                                         <div class="col-sm-12">
                                                                 <select name="country" class="form-control" >
-                                                                        <option value="Australia">Nepal</option>
+                                                                        <option {{ old('country') == 'Nepal'?"selected":"" }} value="Nepal">Nepal</option>
                                                                         <option value="Austria">Austria</option>
                                                                         <option value="Brazil">Brazil</option>
                                                                         <option value="Canada">Canada</option>
@@ -239,7 +241,7 @@
                                                     <label for="city" class="block">City</label>
                                                 </div>
                                                 <div class="col-sm-12">
-                                                    <input id="city" name="city" type="text" class="form-control">
+                                                    <input value = "{{ old('city') }}"id="city" name="city" type="text" class="form-control">
                                                 </div>
                                             </div>
                                             <div class="form-group row">
@@ -247,7 +249,7 @@
                                                         <label for="address_1" class="block">Permanent Residence</label>
                                                     </div>
                                                     <div class="col-sm-12">
-                                                        <input id="address_1" name="address_1" type="text" class="form-control">
+                                                        <input value = "{{ old('address_1') }}"id="address_1" name="address_1" type="text" class="form-control">
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
@@ -255,7 +257,7 @@
                                                             <label for="address_2" class="block">Current Residence *</label>
                                                         </div>
                                                         <div class="col-sm-12">
-                                                            <input id="address_2" name="address_2" type="text" class="form-control ">
+                                                            <input value = "{{ old('address_2') }}"id="address_2" name="address_2" type="text" class="form-control ">
                                                         </div>
                                                     </div>
                                         </fieldset>
