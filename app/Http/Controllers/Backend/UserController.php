@@ -86,9 +86,10 @@ class UserController extends Controller
     }
 
 
-    public function view(User $user)
+    public function view(Request $request , $user_id)
     {
-       return view('backend.user.view');
+      $user_details = User::getUserDetails($user_id); 
+       return view('backend.user.view' , compact('user_details'));
     }
 
 

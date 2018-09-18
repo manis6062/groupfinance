@@ -78,6 +78,7 @@ class UserAjaxController extends Controller
 
 		//get all user details
 			$user_details = User::getUserDetails($user->id);
+			$html_data =  $this->editView();
 			return json_encode(array(
 				"error" => false,
 				"statuscode" => 200,
@@ -89,12 +90,9 @@ class UserAjaxController extends Controller
 			throw new Exception($ex->getMessage());
 		}
 
-
-
-
-
-
 	}
+
+
 
 	public function getAllUsers()
 	{

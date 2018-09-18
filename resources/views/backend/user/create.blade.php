@@ -4,8 +4,9 @@
 <div class="page-body">
 
 <div class="col-sm-12">
+    <div id="edit-user"></div>
 
-        <div class="card">
+        <div class="card" id="create-user">
                 <div class="card-header">
                     <h5>Create User</h5>
                     <span>"Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi</span>
