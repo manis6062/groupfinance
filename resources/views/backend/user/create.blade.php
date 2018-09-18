@@ -4,9 +4,7 @@
 <div class="page-body">
 
 <div class="col-sm-12">
-    <div id="edit-user"></div>
-
-        <div class="card" id="create-user">
+        <div class="card">
                 <div class="card-header">
                     <h5>Create User</h5>
                     <span>"Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi</span>
@@ -31,7 +29,7 @@
                                 <form method="POST"  id = "user-create-form"  class = "wizard-form">
                                     {{-- Ajax Form Action Slug --}}
                                     {!! csrf_field() !!}
-                                    <input type="hidden" name="form_action" value="create_user">
+                                    <input type="hidden" name="action" value="create-user">
                                     <input type="hidden" name="ajax_url" id="path" value="{{url('/users/ajax')}}">
                                         <h3> Login Information </h3>
                                         <fieldset>
@@ -40,31 +38,31 @@
                                                     <label for="name" class="block">User name *</label>
                                                 </div>
                                                 <div class="col-sm-12">
-                                                    <input value = "{{ old('name') }}"id="name" name="name" type="text" class=" form-control" >
+                                                    <input required value = "{{ old('name') }}"id="name" name="name" type="text" class=" form-control" >
                                                 </div>
                                             </div>
                                             <div class="form-group row">
                                                 <div class="col-sm-12">
-                                                    <label for="email-22" class="block">Email *</label>
+                                                    <label for="email" class="block">Email *</label>
                                                 </div>
                                                 <div class="col-sm-12">
-                                                    <input value = "{{ old('email') }}"id="email-22" name="email" type="email" class=" form-control" >
-                                                </div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <div class="col-sm-12">
-                                                    <label for="password-22" class="block">Password *</label>
-                                                </div>
-                                                <div class="col-sm-12">
-                                                    <input value = "{{ old('password') }}"id="password-22" name="password" type="password" class="form-control" >
+                                                    <input required value = "{{ old('email') }}"id="email" name="email" type="email" class=" form-control" >
                                                 </div>
                                             </div>
                                             <div class="form-group row">
                                                 <div class="col-sm-12">
-                                                    <label for="confirm_password" class="block">Confirm Password *</label>
+                                                    <label for="password" class="block">Password *</label>
                                                 </div>
                                                 <div class="col-sm-12">
-                                                    <input id="confirm_password" value = "{{ old('confirm_password') }}name="confirm_password" type="password" class="form-control" >
+                                                    <input value = "{{ old('password') }}"id="password" name="password" type="password" class="form-control" >
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <div class="col-sm-12">
+                                                    <label for="repeat-password" class="block">Confirm Password *</label>
+                                                </div>
+                                                <div class="col-sm-12">
+                                                    <input id="repeat-password" value = "{{ old('confirm_password') }}name="confirm_password" type="password" class="form-control" >
                                                 </div>
                                             </div>
                                         </fieldset>
@@ -250,7 +248,7 @@
                                                         <label for="address_1" class="block">Permanent Residence</label>
                                                     </div>
                                                     <div class="col-sm-12">
-                                                        <input value = "{{ old('address_1') }}"id="address_1" name="address_1" type="text" class="form-control">
+                                                        <input required value = "{{ old('address_1') }}"id="address_1" name="address_1" type="text" class="form-control">
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">

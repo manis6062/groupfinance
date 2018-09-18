@@ -1,38 +1,36 @@
 "use strict";
-$(document).ready(function() {
-  //validation error status code
+$(document).ready(function () {
+  //constants
   const validation_status_code = 422;
-  const error_message = "Oops! Something went wrong. Please try again later.";
-  const insert_message = "Successfully Inserted";
+  const error_msg = "Oops! Something went wrong. Please try again later.";
+  const success_msg = "User Successfully Inserted";
   const debugging = true;
   const notify_style = "inverse";
 
+
   function notify(message, type) {
-    $.growl(
-      {
-        message: message
+    $.growl({
+      message: message
+    }, {
+      type: type,
+      allow_dismiss: false,
+      label: "Cancel",
+      className: "btn-xs btn-inverse",
+      placement: {
+        from: "top",
+        align: "right"
       },
-      {
-        type: type,
-        allow_dismiss: false,
-        label: "Cancel",
-        className: "btn-xs btn-inverse",
-        placement: {
-          from: "top",
-          align: "right"
-        },
-        delay: 3000,
-        animate: {
-          enter: "animated fadeInRight",
-          exit: "animated fadeOutRight"
-        },
-        spacing: 10,
-        offset: {
-          x: 30,
-          y: 30
-        }
+      delay: 3000,
+      animate: {
+        enter: "animated fadeInRight",
+        exit: "animated fadeOutRight"
+      },
+      spacing: 10,
+      offset: {
+        x: 30,
+        y: 30
       }
-    );
+    });
   }
 
   $("#basic-forms").steps({
@@ -64,15 +62,58 @@ $(document).ready(function() {
       transitionEffect: "slide",
       stepsOrientation: "vertical",
       autoFocus: true,
-      onStepChanging: function(event, currentIndex, newIndex) {
+      onStepChanging: function (event, currentIndex, newIndex) {
         // Allways allow previous action even if the current form is not valid!
         if (currentIndex > newIndex) {
           return true;
         }
         // Forbid next action on "Warning" step if the user is to young
-        if (newIndex === 3 && Number($("#age-2").val()) < 18) {
+        if (newIndex === 3 && email < 18) {
           return false;
         }
+
+        //check email exists 
+        var action = "check-email-exists";
+        var url = $('.content input[name="ajax_url"]').val();
+        var email = $("#email").val();
+        if (email !== "") {
+          $.ajaxSetup({
+            headers: {
+              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+          });
+          $.ajax({
+            type: "POST",
+            url: url,
+            data: {
+              email: email,
+              action: "check-email-exists",
+            },
+            dataType: "json",
+            beforeSend: function () {},
+            complete: function () {
+              notify("Test Ajax Completion: ('check-email-exists')", notify_style);
+            },
+            success: function (response) {
+
+              // Forbid next action on "Warning" step if the user is to young
+              if (newIndex === 3 && response) {
+
+                console.log(response);
+
+              } else {
+                notify("Email Already Exists", notify_style);
+                return false;
+              }
+
+            }
+          });
+
+        }
+
+
+
+
         // Needed in some cases if the user went back (clean up)
         if (currentIndex < newIndex) {
           // To remove error styles
@@ -82,7 +123,7 @@ $(document).ready(function() {
         form.validate().settings.ignore = ":disabled,:hidden";
         return form.valid();
       },
-      onStepChanged: function(event, currentIndex, priorIndex) {
+      onStepChanged: function (event, currentIndex, priorIndex) {
         // Used to skip the "Warning" step if the user is old enough.
         if (currentIndex === 2 && Number($("#age-2").val()) >= 18) {
           form.steps("next");
@@ -92,32 +133,39 @@ $(document).ready(function() {
           form.steps("previous");
         }
       },
-      onFinishing: function(event, currentIndex) {
+      onFinishing: function (event, currentIndex) {
         form.validate().settings.ignore = ":disabled";
         return form.valid();
       },
-      onFinished: function(event, currentIndex) {
-        var form = $(this);
+      onFinished: function (event, currentIndex) {
         var url = $('.content input[name="ajax_url"]').val();
+        var form = $(this);
         var data = form.serialize();
         var form_action = $('.content input[name="form_action"]').val();
         $.ajax({
           type: "POST",
           url: url,
-          dataType: "json",
+          // dataType: "json",
           data: form.serialize(), // serializes the form's elements.
-          success: function(response) {
-            var json_response = JSON.parse(response);
-            // status code for validation
-            if (json_response.statuscode == validation_status_code) {
-              for (var errors in json_response.message)
-                notify(json_response.message[errors], notify_style);
+          beforeSend: function () {},
+          complete: function () {
+            notify("Test Ajax Completion: ('create_user')", notify_style);
+          },
+          success: function (response) {
+
+            if (response) {
+              var json_response = JSON.parse(response);
+              // status code for validation
+              if (json_response.code == validation_status_code) {
+                for (var errors in json_response.message)
+                  notify(json_response.message[errors], notify_style);
+              } else {
+                $('.page-body').html(json_response.page);
+              }
             } else {
-              window.location.href = "user/view/".response.data.id;
-              alert(window.location.href);
-              notify(json_response.message, notify_style);
-              console.log(json_response.data);
+              notify(error_msg, notify_style);
             }
+
           }
         });
 
@@ -130,7 +178,7 @@ $(document).ready(function() {
       },
       rules: {
         password: {
-          equalTo: "#confirm_password"
+          equalTo: "#repeat-password"
         }
       }
     });

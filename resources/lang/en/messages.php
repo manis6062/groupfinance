@@ -3,5 +3,5 @@
 return [
 
     'oops' => 'Oops ! Something went wrong',
-    'insert_success' => "Successfully Inserter"
+    'insert_success' => "Successfully Inserted"
 ];

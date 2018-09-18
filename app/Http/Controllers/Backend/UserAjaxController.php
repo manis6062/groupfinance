@@ -18,13 +18,17 @@ class UserAjaxController extends Controller
 	public function index(Request $request)
 	{
 
-		switch ($request->form_action) {
-			case 'create_user':
+		switch ($request->action) {
+			case 'create-user':
 				$res = $this->registerProcess($request);
 				return \Response::json($res);
 				break;
 			case 'show_users':
 				$res = $this->getAllUsers();
+				return \Response::json($res);
+				break;
+			case 'check-email-exists':
+				$res = $this->checkEmailExists($request);
 				return \Response::json($res);
 				break;
 		}
@@ -46,7 +50,7 @@ class UserAjaxController extends Controller
 			if ($v->fails()) {
 				return json_encode(array(
 					"error" => true,
-					"statuscode" => Config::get('constants.validation_status_code'),
+					"code" => Config::get('constants.validation_status_code'),
 					"message" => $v->errors()
 				));
 			}
@@ -78,12 +82,12 @@ class UserAjaxController extends Controller
 
 		//get all user details
 			$user_details = User::getUserDetails($user->id);
-			$html_data =  $this->editView();
+			$page = view("backend.user.ajaxView", compact('user_details'))->render();
 			return json_encode(array(
 				"error" => false,
 				"statuscode" => 200,
-				"message " => "insert_success",
-				"data" => $user_details
+				"msg " => "Successfully Inserted",
+				"page" => $page
 			));
 
 		} catch (\Exception $ex) {
@@ -118,6 +122,18 @@ class UserAjaxController extends Controller
 
 
 
+
+
+	}
+
+
+	public function checkEmailExists(Request $request)
+	{
+
+		if (User::where('email', '=', $request->email)->count() > 0) {
+			return true;
+		}
+		return false;
 
 
 	}

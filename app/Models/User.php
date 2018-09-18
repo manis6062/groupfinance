@@ -64,6 +64,7 @@ class User extends Authenticatable
                 ->join('accounts', 'accounts.id', '=', 'user_accounts.account_id')
                 ->join('user_roles', 'user_roles.user_id', '=', 'users.id')
                 ->join('roles', 'roles.id', '=', 'user_roles.role_id')
+                ->where('users.id', $id)
                 ->first();
         } else {
             return User::join('profile', 'profile.user_id', '=', 'users.id')
