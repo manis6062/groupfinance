@@ -7,7 +7,6 @@ $(document).ready(function () {
   const debugging = true;
   const notify_style = "inverse";
 
-
   function notify(message, type) {
     $.growl({
       message: message
@@ -67,53 +66,6 @@ $(document).ready(function () {
         if (currentIndex > newIndex) {
           return true;
         }
-        // Forbid next action on "Warning" step if the user is to young
-        if (newIndex === 3 && email < 18) {
-          return false;
-        }
-
-        //check email exists 
-        var action = "check-email-exists";
-        var url = $('.content input[name="ajax_url"]').val();
-        var email = $("#email").val();
-        if (email !== "") {
-          $.ajaxSetup({
-            headers: {
-              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-          });
-          $.ajax({
-            type: "POST",
-            url: url,
-            data: {
-              email: email,
-              action: "check-email-exists",
-            },
-            dataType: "json",
-            beforeSend: function () {},
-            complete: function () {
-              notify("Test Ajax Completion: ('check-email-exists')", notify_style);
-            },
-            success: function (response) {
-
-              // Forbid next action on "Warning" step if the user is to young
-              if (newIndex === 3 && response) {
-
-                console.log(response);
-
-              } else {
-                notify("Email Already Exists", notify_style);
-                return false;
-              }
-
-            }
-          });
-
-        }
-
-
-
-
         // Needed in some cases if the user went back (clean up)
         if (currentIndex < newIndex) {
           // To remove error styles
@@ -148,9 +100,7 @@ $(document).ready(function () {
           // dataType: "json",
           data: form.serialize(), // serializes the form's elements.
           beforeSend: function () {},
-          complete: function () {
-            notify("Test Ajax Completion: ('create_user')", notify_style);
-          },
+          complete: function () {},
           success: function (response) {
 
             if (response) {
@@ -177,9 +127,60 @@ $(document).ready(function () {
         element.before(error);
       },
       rules: {
+        confirm_password: {
+          equalTo: "#password",
+          required: true
+        },
         password: {
-          equalTo: "#repeat-password"
+          min: 3,
+          required: true
+        },
+        first_name: {
+          required: true
+        },
+        last_name: {
+          required: true
+        },
+        phone: {
+          required: true
+        },
+        mobile: {
+          required: true,
+        },
+        address_1: {
+          required: true,
+        },
+        address_2: {
+          required: true,
+        },
+        city: {
+          required: true
+        },
+        email: {
+          required: true,
+          remote: {
+            url: $('.content input[name="ajax_url"]').val(),
+            type: "POST",
+            data: {
+              email: function () {
+                return $("#email").val();
+              },
+              action: "check-email-exists",
+              _token: $('#token').val()
+            }
+          }
+        }
+      },
+      messages: {
+        name: "Please specify your username",
+        confirm_password: {
+          required: "Password Confirmation should be matched"
+        },
+        email: {
+          required: "We need your email address to contact you",
+          remote: "The email has been taken",
         }
       }
+
     });
 });

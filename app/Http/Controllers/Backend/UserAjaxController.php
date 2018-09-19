@@ -131,9 +131,9 @@ class UserAjaxController extends Controller
 	{
 
 		if (User::where('email', '=', $request->email)->count() > 0) {
-			return true;
+			return false;
 		}
-		return false;
+		return true;
 
 
 	}

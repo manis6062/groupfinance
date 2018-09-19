@@ -31,6 +31,7 @@
                                     {!! csrf_field() !!}
                                     <input type="hidden" name="action" value="create-user">
                                     <input type="hidden" name="ajax_url" id="path" value="{{url('/users/ajax')}}">
+                                    <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
                                         <h3> Login Information </h3>
                                         <fieldset>
                                             <div class="form-group row">
@@ -59,10 +60,10 @@
                                             </div>
                                             <div class="form-group row">
                                                 <div class="col-sm-12">
-                                                    <label for="repeat-password" class="block">Confirm Password *</label>
+                                                    <label for="confirm_password" class="block">Confirm Password *</label>
                                                 </div>
                                                 <div class="col-sm-12">
-                                                    <input id="repeat-password" value = "{{ old('confirm_password') }}name="confirm_password" type="password" class="form-control" >
+         <input id="confirm_password" value = "{{ old('confirm_password') }}"name="confirm_password" type="password" class="form-control" >
                                                 </div>
                                             </div>
                                         </fieldset>
